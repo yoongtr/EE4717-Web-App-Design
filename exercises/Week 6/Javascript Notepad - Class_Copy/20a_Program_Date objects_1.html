@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+</head>
+<body> 
+
+<script>
+
+
+     function printtime()
+	 {
+	 var now = new Date();   // define an object Date  
+	 var hours = now.getHours();   // Date has different methods 
+	 var mins = now.getMinutes();
+	 var secs = now.getSeconds();
+	 
+	 
+	 document.write(hours + ":" + mins + ":" + secs + "<br/>");   // it print out it after every 1000 secs
+	 }
+   
+   setInterval("printtime()", 1000);   // setInterval has two inputs- calling function and delay 
+   
+   </script>
+
+	
+	
+	
+
+</body>
+</html>

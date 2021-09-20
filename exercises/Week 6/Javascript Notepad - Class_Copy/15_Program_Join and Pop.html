@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+</head>
+<body> 
+
+<script>
+
+	var boys = new Array("bucky", "sam", "alan")   // defining an array using Array.....limited numbers of places available like 3
+	var girls = new Array("natalie", "hannah", "sharon")     
+	
+	var string1 = boys.join();       // calling join method in array join all the names as string
+	var string2 = girls.join(); 
+	 
+ 	document.write("boys - " + string1 + "<br/>"+" girls -" + string2 + "<br/>" );     
+
+	boys.pop();   // it will remove the last member of array. so undefine will appear
+	
+	document.write(boys[2]); 
+	 
+	boys.pop();    // if we call again the the element at 1 will be removed. 
+	document.write("<br/>"+ boys[1]); 
+   
+   </script>
+
+	
+	
+	
+
+</body>
+</html>
