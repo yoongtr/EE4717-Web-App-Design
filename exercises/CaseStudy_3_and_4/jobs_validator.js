@@ -49,7 +49,7 @@ function chkDate(event) {
     // console.log("now" + nowDate);
     // console.log(startDate.value<=nowDate);
 
-    if (startDate.value <= nowDate) {
+    if (startDate.value < nowDate || startDate.value === nowDate) {
         alert("The start date cannot be from today and the past.");
         startDate.focus();
         startDate.select();

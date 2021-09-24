@@ -10,7 +10,11 @@ var nameNode = document.getElementById("myName");
 var emailNode = document.getElementById("myEmail");
 var startDateNode = document.getElementById("startDate");
 var expNode = document.getElementById("myExp");
+
+
 nameNode.addEventListener("change", chkName, false);
 emailNode.addEventListener("change", chkEmail, false);
 startDateNode.addEventListener("change", chkDate, false);
 expNode.addEventListener("change", chkExp, false);
+
+

@@ -1,3 +1,9 @@
+<!-- Update as of 24th September
+1. Since I wasn't sure how to add experience checking witht event listener i just did the "onsubmit" way
+2. For some reason, if i left the "required" in the Apply input, I wouldn't get the js alert. It would give me html
+   So I removed it haha.
+3. The data validatopr works now. I just put an OR instead of <= in the js file -->
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -25,7 +31,7 @@
                 <div class="content">
                     <h2>Jobs at JavaJam</h2>
                     <p>Want to work at JavaJam? Fill out the form below to start your application. Required fields are marked with an asterisk *</p>
-                    <form method="post" action="show_post.php" name="jobForm">
+                    <form method="post" action="show_post.php" name="jobForm" onsubmit="return formCheck()"> 
                         <table border="0">
                             <tr>
                                 <td id="form-label"><label for="myName">*Name:</label></td>
@@ -41,12 +47,21 @@
                             </tr>
                             <tr>
                                 <td id="form-label"><label for="myExp">*Experience:</label></td>
-                                <td id="table-rightcol"><textarea type="textarea" name="myExp" id="myExp" rows="4" cols="40" required placeholder="Enter your past experience here"></textarea><br></td>
+                                <td id="table-rightcol"><textarea type="textarea" name="myExp" id="myExp" rows="4" cols="40" placeholder="Enter your past experience here"></textarea><br></td>
                             </tr>
                         </table>
                         <input type="reset" value="Clear"><br><br>
                         <input type="submit" value="Apply Now"><br><br>
                     </form>
+                    <script>
+                        function formCheck(){
+                            var experience = document.forms["jobForm"]["myExp"].value;
+                            if (experience == "") {
+                                alert("Experience field cannot be empty"); 
+                                return false;
+                            }
+                        }
+                    </script>
                     <script type="text/javascript" src="jobs_events.js" ></script>
                 </div>
             </div>
