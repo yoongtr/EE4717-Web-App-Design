@@ -1,16 +1,19 @@
 body {
     font-family: Verdana, Arial, sans-serif;
+    margin: 0; /*Added both margin and padding equal 0 to remove white outlines*/
+    padding: 0;
+    box-sizing: border-box;
 }
 
 #wrapper {
     background-color: #FCF8F3; 
-    width: 80%;
+    width: 100%; /*Changed it to 100% width*/
     margin: auto;
     min-width: 800px;
 } 
 header {
     background-color: #F9F1E7;
-    padding: 50px 10px 50px 10px;
+    padding: 30px 10px; /*Removed additional 50px and 10px and changed 50px to 30px for a smaller navbar height*/
 }
 #header-logo {
     font-family: Inter;
@@ -19,7 +22,7 @@ header {
     font-size: 2.3vw;
     line-height: 29px;
     color: #000000;
-    padding: 10px 10px 10px 185px;
+    padding: 10px; /*Removed the 185px left padding to make logo align better with design*/
 }
 
 /* Navbar stuff */
@@ -72,6 +75,13 @@ nav .search-container button:hover {
 nav .account-info {
     float: right;
 }
+
+/* Added content padding */
+.content{
+    padding: 2% 6%;  
+}
+
+
 /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
 @media screen and (max-width: 600px) {
     nav .search-container {
@@ -116,3 +126,28 @@ footer p {
 footer a {
     text-decoration: none;
 }
+
+
+
+
+/* MY CART PAGE */
+.my-cart{
+    display: flex;
+}
+.my-cart-items, .my-cart-total{
+    border: 1px solid black;
+    min-height: 200px;
+}
+
+.my-cart-items{
+    min-width: 80%
+}
+
+.my-cart-total{
+    min-width: 18%;
+}
+
+.my-cart-total{
+    margin-left: 20px;
+}
+    
