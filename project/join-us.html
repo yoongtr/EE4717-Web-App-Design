@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- Added My Cart Page -->
 <!-- Changed relevant links to my-cart.html and join-us.html-->
 <html lang="en">
     <head>
@@ -15,7 +14,7 @@
                     <a href="index.html">Trending</a>
                     <a href="index.html">SALE</a>
                     <a href="index.html">Products</a>
-                    <a href="join-us.html">Join Us!</a>
+                    <a href="index.html">Join Us!</a>
                     <div class="search-container">
                         <form>
                           <input type="text" placeholder="Search..." name="search">
@@ -24,7 +23,7 @@
                     </div>
                     <div class="account-info">
                         <a href="index.html"><img src="img/wishlist.png" width="30" height="30"></a>
-                        <a href="my-cart.html"><img src="img/cart-icon-28356.png" width="30" height="30"></a>
+                        <a href="my-cart.html"><img src="img/cart-icon-28356.png" width="30" height="30"></a> 
                         <a href="index.html"><img src="img/user-icon.png" width="30" height="30"></a>
                     </div>
                 </nav>
@@ -34,17 +33,46 @@
             </div>
             <div>
                 <div class="content">
-                    <p>My Cart</p>
-                    <div class="my-cart">
-                        <div class="my-cart-items">
-                            Put items
-                        </div>
-                        <div class="my-cart-total">
-                            Put subtotal
-                        </div>
+                    <div class="join-us-header">
+                        <h1>Start your career with the Memeology Team!</h1>
+                        <p>We don't bite:)</p>
                     </div>
-                    
+                    <div class="join-us-form">
+                        <form>
+                            <div class="join-us-form-box">
+                                <div class="inputBox w50">
+                                  <input type="text" id="Name" name="Name" required>
+                                  <span>First Name</span>
+                                </div>
+                                <div class="inputBox w50">
+                                  <input type="text" id="lastName" name="Last Name" required>
+                                  <span>Last Name</span>
+                                </div>
+                                <div class="inputBox w50">
+                                  <input type="email" id="Email" name="Email" required>
+                                  <span>Email Address</span>
+                                </div>
+                                <div class="inputBox w50">
+                                  <input type="number" id="number" name="Number" required>
+                                  <span>Mobile Number</span>
+                                </div>
+                                <div class="inputBox w50">
+                                    <input type="text" id="subject" name="subject" required>
+                                    <span>Subject</span>
+                                  </div>
+                                <div class="inputBox w100">
+                                  <textarea id="Message" name="Message" required></textarea>
+                                  <span>Message (including work experience here)</span>
+                                </div>  
+                              </div>
+                              <div class="inputBox w100">
+                                <input type="submit" id="form-submit" value="Submit Application">
+                              </div>
+                              <div id="msgSubmit" class="h3 text-center hidden"></div>
+                        </form>
+                    </div>
                 </div>
+                
             </div>
             <footer>
                 <hr>
