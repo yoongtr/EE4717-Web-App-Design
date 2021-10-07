@@ -196,7 +196,7 @@ footer a {
     resize: none;
     font-size: 18px;
     font-weight: 300;
-    color: white;
+    color: black;
     border: none;
     /* border-bottom: 1px solid #777; */
     outline: none;
@@ -229,7 +229,7 @@ footer a {
     color: #757575;
   }
   
-  .inputBox input[type="submit"]{
+.join-us-form  .inputBox input[type="submit"]{
     position: relative;
     font-size: 16px;
     cursor: pointer;
@@ -246,4 +246,36 @@ footer a {
     background: #777;
     color: black;
   }
-  
+
+/* LOGIN PAGE */
+
+.login-form{
+    padding: 2% 25%;
+}
+.login-form-box{
+    position: relative;
+    display: flex;
+    flex-direction: column; 
+    background-color: white;
+    border: 1px solid black;
+    padding: 50px 80px;
+  }
+
+.login-form-input{
+  margin: 10px 0;
+}
+
+.login-form-input input{
+  float: right;
+  width: 60%;
+}
+
+.login-form-submit{
+  text-align: center;
+}
+
+.login-form-submit input{
+  padding: 10px 40px;
+  margin-top: 20px;
+}
+
