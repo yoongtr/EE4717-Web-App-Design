@@ -126,7 +126,86 @@ footer p {
 footer a {
     text-decoration: none;
 }
+h2 {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    text-align: center;
+}
 
+
+/* HOME PAGE */
+* {box-sizing:border-box}
+/* Slideshow container */
+.slideshow-container {
+  position: relative;
+  margin: auto;
+}
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+.active, .dot:hover {
+  background-color: #717171;
+}
+.column-4 {
+    float: left;
+    width: 25%;
+    text-align: center;
+}
+.home-desc h4 {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    color: #3A3A3A;
+}
+.home-desc p {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    color: #898989;
+}
+.home-row {
+    clear: both;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
 
 /* MY CART PAGE */
 .my-cart{
