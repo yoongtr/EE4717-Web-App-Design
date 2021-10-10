@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>JavaJam Coffee House</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="wrapper">
+            <header>
+                <img src="img/header.png" id="img" alt="header" width="500">
+            </header>
+            <div id="leftcolumn">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li><br>
+                        <li><a href="menu.html">Menu</a></li><br>
+                        <li><a href="music.html">Music</a></li><br>
+                        <li><a href="jobs.html">Jobs</a></li><br>
+                        <li><a href="priceupdate.html" class="active-page">Product<br>Price<br>Update</a></li><br>
+                        <li><a href="salesreport.html">Daily<br>Sales<br>Report</a></li><br>
+                    </ul>
+                </nav>
+            </div>
+            <div id="rightcolumn">
+                <div class="content">
+                    <h2>Click to update product prices</h2>
+                    <table border="0" id="centered">
+                    <form id="update_price">
+                        <tr id="table-row-1">
+                            <td id="update-checkbox"><input type="checkbox" id="justjava_update" name="justjava_update"></td>
+                            <td headers="dish" id="table-leftcol">Just Java</td>
+                            <td headers="description" id="table-rightcol">
+                                Regular house blend, decaffeinated coffee, or flavour of the day.
+                                <br><strong>Endless Cup $2.00</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="update-checkbox"><input type="checkbox" id="cal_update" name="cal_update"></td>
+                            <td headers="dish" id="table-leftcol">Cafe au Lait</td>
+                            <td headers="description" id="table-rightcol">
+                                House blended coffee infused into a smooth, steamed milk.
+                                <br><strong>Single $2.00 double $3.00</strong>
+                            </td>
+                        </tr>
+                        <tr id="table-row-1">
+                            <td id="update-checkbox"><input type="checkbox" id="ic_update" name="ic_update"></td>
+                            <td headers="dish" id="table-leftcol">Iced Cappucino</td>
+                            <td headers="description" id="table-rightcol">
+                                Sweetened espresso blended withicy-cold milk and served in chilled glass.
+                                <br><strong>Single $4.75 Double $5.75</strong>
+                            </td>
+                        </tr>
+                    </form>
+                    </table>
+                </div>
+            </div>
+            <footer>
+                <small><i>Copyright &copy; 2014 JavaJam Coffee House</i></small>
+                <br>
+                <small><i>Email: <a href="mailto:thuydung001@e.ntu.edu.sg">thuydung@tran.com</a></i></small>
+            </footer>
+        </div>
+    </body>
+</html>

@@ -90,7 +90,7 @@ nav ul li a.active-page
     list-style-image: url(img/coffee-icon.png);
 }
 
-/* TABLE STYLINGS FOR MENU, MUSIC AND JOBS */
+/* TABLE STYLINGS FOR MENU, MUSIC, JOBS, CHANGE PRICE, SALES REPORT */
 #table-row-1{ /*for darker color rows*/
     background-color: #D0B38D;
     padding: 20px;
@@ -121,6 +121,18 @@ nav ul li a.active-page
 input[type='number']{
     width: 40px;
 } 
+#update-checkbox {
+    text-align: center;
+    background-color: #F5F4DD;
+}
+input[type='checkbox'] {
+    width: 100px;
+    height: 30px;
+}
+.report-checkboxes input[type='checkbox'] {
+    width: 100px;
+    height: 20px;
+}
 
 /* FORM STYLINGS FOR JOBS PAGE */
 #form-label {
