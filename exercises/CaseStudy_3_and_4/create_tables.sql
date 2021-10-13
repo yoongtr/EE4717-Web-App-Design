@@ -1,0 +1,13 @@
+USE f32ee;
+
+CREATE TABLE case4Drinks (
+    drinkID INT UNSIGNED NOT NULL PRIMARY KEY,
+    drinkName CHAR(50) NOT NULL,
+    price FLOAT(4,2)
+);
+
+CREATE TABLE case4Orders (
+    orderID INT UNSIGNED NOT NULL,
+    drinkID INT UNSIGNED NOT NULL,
+    quantity TINYINT UNSIGNED
+);
