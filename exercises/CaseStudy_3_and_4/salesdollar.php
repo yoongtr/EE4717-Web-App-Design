@@ -19,13 +19,12 @@
                   LEFT JOIN case4Drinks ON case4Orders.drinkID = case4Drinks.drinkID
                   GROUP BY case4Drinks.drinkID";
             $result = $db->query($sql);
-            
+
             if ($result->num_rows > 0) {
               echo '<table><tr><th align="left">Product Name&nbsp;</th><th>&nbsp;Sales($)</th></tr>';
-                while($row = $result->fetch_assoc()) {
-                echo '<tr><td>' .$row["drinkName"]. '&nbsp;</td><td align="center">&nbsp;' .$row["totalSales"]. "</td></tr>"; 
-                     
-              } 
+              while($row = $result->fetch_assoc()) {
+                echo '<tr><td>' .$row["drinkName"]. '&nbsp;</td><td align="center">&nbsp;' .$row["totalSales"]. "</td></tr>";    
+              }
               echo "</table>"; 
             }
             else {
