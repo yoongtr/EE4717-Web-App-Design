@@ -1,8 +1,15 @@
+<?php   
+session_start();  
+if(!isset($_SESSION["sess_user"])){  
+    header("location:login.html");  
+} else{
+?>
 <!DOCTYPE html>
-<!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
+<!-- Added My Cart Page -->
+<!-- Changed relevant links to my-cart.html and join-us.html-->
 <html lang="en">
     <head>
-        <title>Register | Memeology</title>
+        <title>Memeology</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="styles.css">
     </head>
@@ -23,7 +30,7 @@
                     </div>
                     <div class="account-info">
                         <a href="index.html"><img src="img/wishlist.png" width="30" height="30"></a>
-                        <a href="my-cart.php"><img src="img/cart-icon-28356.png" width="30" height="30"></a> 
+                        <a href="my-cart.php"><img src="img/cart-icon-28356.png" width="30" height="30"></a>
                         <a href="login.html"><img src="img/user-icon.png" width="30" height="30"></a>
                     </div>
                 </nav>
@@ -33,37 +40,18 @@
             </div>
             <div>
                 <div class="content">
-                    <div class="login-form">
-                        <form action="register.php" method="POST">
-                            <div class="login-form-box">
-                                <div class="login-form-input">
-                                    <label for="firstName">First Name:</label>
-                                    <input type="text" id="firstName" name="firstName" required>
-                                </div>
-                                <div class="login-form-input">
-                                    <label for="lastName">Last Name:</label>
-                                    <input type="text" id="lastName" name="lastName" required>
-                                </div>
-                                <div class="login-form-input">
-                                    <label for="username">Username:</label>
-                                    <input type="text" id="username" name="username" required>
-                                </div>
-                                <div class="login-form-input">
-                                  <label for="Email">Email:</label>
-                                  <input type="email" id="email" name="email" required>
-                                </div>
-                                <div class="login-form-input">
-                                  <label for="Password">Password:</label>
-                                  <input type="password" id="password" name="password" required>
-                                </div>
-                                <div class="login-form-submit">
-                                    <input type="submit" name="submit" id="submit" value="Submit">
-                                  </div>  
-                              </div>
-                        </form>
+                    <p>My Cart. Welcome
+                    <?=$_SESSION['sess_user'];?>! <a href="logout.php">Logout</a></p>
+                    <div class="my-cart">
+                        <div class="my-cart-items">
+                            Put items
+                        </div>
+                        <div class="my-cart-total">
+                            Put subtotal
+                        </div>
                     </div>
+                    
                 </div>
-                
             </div>
             <footer>
                 <hr>
@@ -107,3 +95,6 @@
         </div>
     </body>
 </html>
+<?php
+}
+?>

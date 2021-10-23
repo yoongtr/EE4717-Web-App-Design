@@ -23,7 +23,7 @@
                     </div>
                     <div class="account-info">
                         <a href="index.html"><img src="img/wishlist.png" width="30" height="30"></a>
-                        <a href="my-cart.html"><img src="img/cart-icon-28356.png" width="30" height="30"></a> 
+                        <a href="my-cart.php"><img src="img/cart-icon-28356.png" width="30" height="30"></a> 
                         <a href="login.html"><img src="img/user-icon.png" width="30" height="30"></a>
                     </div>
                 </nav>
@@ -34,18 +34,18 @@
             <div>
                 <div class="content">
                     <div class="login-form">
-                        <form>
+                        <form action="login.php" method="post">
                             <div class="login-form-box">
                                 <div class="login-form-input">
-                                  <label for="Email">Email:</label>
-                                  <input type="email" id="email" name="Email" required>
+                                  <label for="Username">Username:</label>
+                                  <input type="text" id="username" name="username" required>
                                 </div>
                                 <div class="login-form-input">
                                   <label for="Password">Password:</label>
-                                  <input type="password" id="password" name="Password" required>
+                                  <input type="password" id="password" name="password" required>
                                 </div>
                                 <div class="login-form-submit">
-                                    <input type="submit" id="form-submit" value="Login">
+                                    <input type="submit" name="login" id="login" value="Login">
                                 </div> <br> 
                                 <div><a href="register.html">Register if you don't have an account</a></div> 
                             </div>
@@ -75,7 +75,7 @@
                         <h3>Account</h3>
                         <p><a href="index.html">My Account</a></p>
                         <p><a href="index.html">Checkout</a></p>
-                        <p><a href="my-cart.html">My Cart</a></p>
+                        <p><a href="my-cart.php">My Cart</a></p>
                         <p><a href="index.html">My Wishlist</a></p>
                     </div>
                     <div class="column-5">
