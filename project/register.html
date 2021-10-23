@@ -2,7 +2,7 @@
 <!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
 <html lang="en">
     <head>
-        <title>Memeology</title>
+        <title>Register | Memeology</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="styles.css">
     </head>
@@ -34,21 +34,32 @@
             <div>
                 <div class="content">
                     <div class="login-form">
-                        <form>
+                        <form action="register.php" method="POST">
                             <div class="login-form-box">
                                 <div class="login-form-input">
+                                    <label for="firstName">First Name:</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="login-form-input">
+                                    <label for="lastName">Last Name:</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                                <div class="login-form-input">
+                                    <label for="username">Username:</label>
+                                    <input type="text" id="username" name="username" required>
+                                </div>
+                                <div class="login-form-input">
                                   <label for="Email">Email:</label>
-                                  <input type="email" id="email" name="Email" required>
+                                  <input type="email" id="email" name="email" required>
                                 </div>
                                 <div class="login-form-input">
                                   <label for="Password">Password:</label>
-                                  <input type="password" id="password" name="Password" required>
+                                  <input type="password" id="password" name="password" required>
                                 </div>
                                 <div class="login-form-submit">
-                                    <input type="submit" id="form-submit" value="Login">
-                                </div> <br> 
-                                <div><a href="register.html">Register if you don't have an account</a></div> 
-                            </div>
+                                    <input type="submit" name="submit" id="submit" value="Submit">
+                                  </div>  
+                              </div>
                         </form>
                     </div>
                 </div>

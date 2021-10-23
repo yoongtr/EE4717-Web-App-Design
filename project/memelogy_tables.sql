@@ -4,7 +4,8 @@ USE f32ee;
 
 CREATE TABLE users (
     UserID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    FullName CHAR(40),
+    FirstName CHAR(40),
+    LastName CHAR(40),
     ProfileImage LONGBLOB,
     Username VARCHAR(20) NOT NULL,
     Email VARCHAR(40) NOT NULL,
