@@ -24,6 +24,6 @@ else
 	echo "Welcome ". $username . ". You are now registered";
 	session_start();  
     $_SESSION['sess_user']=$username;
-	header("location:index.html");  
+	header("location:index.php");  
 	
 ?>

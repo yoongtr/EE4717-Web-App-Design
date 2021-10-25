@@ -1,12 +1,5 @@
-<?php   
-session_start();  
-if(!isset($_SESSION["sess_user"])){  
-    header("location:login-main.php");  
-} else{
-?>
 <!DOCTYPE html>
-<!-- Added My Cart Page -->
-<!-- Changed relevant links to my-cart.html and join-us.html-->
+<!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
 <html lang="en">
     <head>
         <title>Memeology</title>
@@ -30,8 +23,8 @@ if(!isset($_SESSION["sess_user"])){
                     </div>
                     <div class="account-info">
                         <a href="index.html"><img src="img/wishlist.png" width="30" height="30"></a>
-                        <a href="my-cart.php"><img src="img/cart-icon-28356.png" width="30" height="30"></a>
-                        <a href="login-main.php"><img src="img/user-icon.png" width="30" height="30"></a>
+                        <a href="my-cart.php"><img src="img/cart-icon-28356.png" width="30" height="30"></a> 
+                        <a href="login.html"><img src="img/user-icon.png" width="30" height="30"></a>
                     </div>
                 </nav>
             </header>
@@ -40,18 +33,46 @@ if(!isset($_SESSION["sess_user"])){
             </div>
             <div>
                 <div class="content">
-                    <p>My Cart. Welcome
-                    <?=$_SESSION['sess_user'];?>! <a href="logout.php">Logout</a></p>
-                    <div class="my-cart">
-                        <div class="my-cart-items">
-                            Put items
-                        </div>
-                        <div class="my-cart-total">
-                            Put subtotal
-                        </div>
+                    <div class="join-us-header">
+                        <h1>Start your career with the Memeology Team!</h1>
+                        <p>We don't bite:)</p>
                     </div>
-                    
+                    <div class="join-us-form">
+                        <form>
+                            <div class="join-us-form-box">
+                                <div class="inputBox w50">
+                                  <input type="text" id="Name" name="Name" required>
+                                  <span>First Name</span>
+                                </div>
+                                <div class="inputBox w50">
+                                  <input type="text" id="lastName" name="Last Name" required>
+                                  <span>Last Name</span>
+                                </div>
+                                <div class="inputBox w50">
+                                  <input type="email" id="email" name="Email" required>
+                                  <span>Email Address</span>
+                                </div>
+                                <div class="inputBox w50">
+                                  <input type="number" id="number" name="Number" required>
+                                  <span>Mobile Number</span>
+                                </div>
+                                <div class="inputBox w50">
+                                    <input type="text" id="subject" name="subject" required>
+                                    <span>Subject</span>
+                                  </div>
+                                <div class="inputBox w100">
+                                  <textarea id="Message" name="Message" required></textarea>
+                                  <span>Message (including work experience here)</span>
+                                </div>  
+                              </div>
+                              <div class="inputBox w100">
+                                <input type="submit" id="form-submit" value="Submit Application">
+                              </div>
+                              <div id="msgSubmit" class="h3 text-center hidden"></div>
+                        </form>
+                    </div>
                 </div>
+                
             </div>
             <footer>
                 <hr>
@@ -72,7 +93,7 @@ if(!isset($_SESSION["sess_user"])){
                     </div>
                     <div class="column-5">
                         <h3>Account</h3>
-                        <p><a href="my-account.php">My Account</a></p>
+                        <p><a href="index.html">My Account</a></p>
                         <p><a href="index.html">Checkout</a></p>
                         <p><a href="my-cart.php">My Cart</a></p>
                         <p><a href="index.html">My Wishlist</a></p>
@@ -95,6 +116,3 @@ if(!isset($_SESSION["sess_user"])){
         </div>
     </body>
 </html>
-<?php
-}
-?>

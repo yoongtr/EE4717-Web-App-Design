@@ -134,6 +134,7 @@ h2 {
     font-weight: bold;
     font-size: 40px;
     text-align: center;
+    text-decoration: none;
 }
 
 
@@ -208,6 +209,7 @@ h2 {
     padding-top: 50px;
     padding-bottom: 50px;
     text-align: center;
+    margin: auto;
 }
 .memeologyit p {
     font-family: Inter;
@@ -240,7 +242,32 @@ h2 {
     font-size: 16px;
     color: #616161;
 }
-
+.home-table {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border: 30px;
+}
+.home-table h4 {
+    text-decoration: none;
+}
+.home-table .row-1 {
+    padding: 20px;
+}
+.home-table .row-2 {
+    padding: 20px;
+    background-color: #F4F5F7;
+}
+button {
+    background-color: #E89F71;
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
 /* MY CART PAGE */
 .my-cart{
     display: flex;

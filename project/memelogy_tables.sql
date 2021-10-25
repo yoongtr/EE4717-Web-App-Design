@@ -16,7 +16,7 @@ CREATE TABLE products (
     ProductName VARCHAR(40) NOT NULL,
     ProductImage LONGBLOB,
     ProductDescription VARCHAR(100) NOT NULL,
-    Price INT UNSIGNED NOT NULL,
+    Price FLOAT(4,2) NOT NULL,
     ProductCategory VARCHAR(20) NOT NULL,
     Trending BOOLEAN NOT NULL,
     Sale BOOLEAN NOT NULL,
