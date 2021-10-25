@@ -5,11 +5,9 @@ if(!isset($_SESSION["sess_user"])){
 } else{
 ?>
 <!DOCTYPE html>
-<!-- Added My Cart Page -->
-<!-- Changed relevant links to my-cart.html and join-us.html-->
 <html lang="en">
     <head>
-        <title>Memeology</title>
+        <title>My Account | Memeology</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="styles.css">
     </head>
@@ -31,7 +29,7 @@ if(!isset($_SESSION["sess_user"])){
                     <div class="account-info">
                         <a href="index.html"><img src="img/wishlist.png" width="30" height="30"></a>
                         <a href="my-cart.php"><img src="img/cart-icon-28356.png" width="30" height="30"></a>
-                        <a href="login-main.php"><img src="img/user-icon.png" width="30" height="30"></a>
+                        <a href="login.html"><img src="img/user-icon.png" width="30" height="30"></a>
                     </div>
                 </nav>
             </header>
@@ -40,17 +38,27 @@ if(!isset($_SESSION["sess_user"])){
             </div>
             <div>
                 <div class="content">
-                    <p>My Cart. Welcome
-                    <?=$_SESSION['sess_user'];?>! <a href="logout.php">Logout</a></p>
-                    <div class="my-cart">
-                        <div class="my-cart-items">
-                            Put items
-                        </div>
-                        <div class="my-cart-total">
-                            Put subtotal
+                    <p>My Account Details. Welcome <?=$_SESSION['sess_user'];?>! <a href="logout.php">Logout</a></p>
+                    <div class="my-account">
+                        <div class="my-account-details">
+                            <?php
+                            include "dbconnect.php";
+                            $username = $_SESSION["sess_user"];
+                            // echo $username;
+                            $query = "SELECT FirstName, LastName, Email FROM users WHERE Username = '$username'";
+                            $result = $dbcnx->query($query);
+                            if (!$result){
+                                echo "query_failed";
+                            }
+                            else{
+                                $row = $result->fetch_assoc();
+                                echo "<p>First Name: " .$row["FirstName"]. "</p>";
+                                echo "<p>Last Name: " .$row["LastName"]. "</p>";
+                                echo "<p>Email: " .$row["Email"]. "</p>";
+                            }
+                            ?>
                         </div>
                     </div>
-                    
                 </div>
             </div>
             <footer>
@@ -72,7 +80,7 @@ if(!isset($_SESSION["sess_user"])){
                     </div>
                     <div class="column-5">
                         <h3>Account</h3>
-                        <p><a href="my-account.php">My Account</a></p>
+                        <p><a href="index.html">My Account</a></p>
                         <p><a href="index.html">Checkout</a></p>
                         <p><a href="my-cart.php">My Cart</a></p>
                         <p><a href="index.html">My Wishlist</a></p>

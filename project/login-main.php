@@ -1,3 +1,9 @@
+<?php   
+session_start();  
+if(isset($_SESSION["sess_user"])){  
+    header("location:my-account.php");  
+} else{
+?>
 <!DOCTYPE html>
 <!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
 <html lang="en">
@@ -24,7 +30,7 @@
                     <div class="account-info">
                         <a href="index.html"><img src="img/wishlist.png" width="30" height="30"></a>
                         <a href="my-cart.php"><img src="img/cart-icon-28356.png" width="30" height="30"></a> 
-                        <a href="login.html"><img src="img/user-icon.png" width="30" height="30"></a>
+                        <a href="login-main.php"><img src="img/user-icon.png" width="30" height="30"></a>
                     </div>
                 </nav>
             </header>
@@ -73,7 +79,7 @@
                     </div>
                     <div class="column-5">
                         <h3>Account</h3>
-                        <p><a href="index.html">My Account</a></p>
+                        <p><a href="my-account.php">My Account</a></p>
                         <p><a href="index.html">Checkout</a></p>
                         <p><a href="my-cart.php">My Cart</a></p>
                         <p><a href="index.html">My Wishlist</a></p>
@@ -96,3 +102,6 @@
         </div>
     </body>
 </html>
+<?php
+}
+?>

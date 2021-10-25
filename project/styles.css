@@ -392,3 +392,13 @@ h2 {
   margin-top: 20px;
 }
 
+/* My Account Page */
+.my-account{
+    display: flex;
+}
+
+.my-account .my-account-details{
+    border: 1px solid black;
+    min-height: 200px;
+    min-width: 80%;
+}
