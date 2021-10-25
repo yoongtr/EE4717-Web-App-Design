@@ -6,7 +6,6 @@ CREATE TABLE users (
     UserID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     FirstName CHAR(40),
     LastName CHAR(40),
-    ProfileImage LONGBLOB,
     Username VARCHAR(20) NOT NULL,
     Email VARCHAR(40) NOT NULL,
     UserPassword VARCHAR(40) NOT NULL
@@ -14,11 +13,14 @@ CREATE TABLE users (
 
 CREATE TABLE products (
     ProductSKU VARCHAR(20) NOT NULL PRIMARY KEY,
-    ProductName CHAR(40) NOT NULL,
-    ProductImage LONGBLOB NOT NULL,
+    ProductName VARCHAR(40) NOT NULL,
+    ProductImage LONGBLOB,
     ProductDescription VARCHAR(100) NOT NULL,
     Price INT UNSIGNED NOT NULL,
     ProductCategory VARCHAR(20) NOT NULL,
+    Trending BOOLEAN NOT NULL,
+    Sale BOOLEAN NOT NULL,
+    SpecialCollection BOOLEAN NOT NULL,
     Quantity INT UNSIGNED NOT NULL
 );
  
@@ -27,15 +29,18 @@ CREATE TABLE orders (
     ProductSKU VARCHAR(20) NOT NULL, 
     UserID INT UNSIGNED NOT NULL, 
     OrderQuantity INT UNSIGNED NOT NULL,
-    OrderStatus VARCHAR(20) NOT NULL,
+    DeliveryAddress VARCHAR(200) NOT NULL,
     FOREIGN KEY (ProductSKU) REFERENCES products(ProductSKU),
     FOREIGN KEY (UserID) REFERENCES users(UserID)
 );
 
-CREATE TABLE jobs (
-    JobSubmissionID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE memologyIt (
+    SubmissionID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     UserID INT UNSIGNED NOT NULL, 
-    StartDate DATE NOT NULL,
-    Experience VARCHAR(100) NOT NULL,
+    ItemName VARCHAR(40) NOT NULL,
+    Colour VARCHAR(100) NOT NULL,
+    ImageUploaded LONGBLOB NOT NULL,
+    DeliveryAddress VARCHAR(200) NOT NULL,
+    Comments VARCHAR(200) NOT NULL,
     FOREIGN KEY (UserID) REFERENCES users(UserID)
 );
