@@ -10,11 +10,11 @@
         <div id="wrapper">
             <header>
                 <nav>
-                    <a href="index.html" id="header-logo">Memeology</a>
-                    <a href="index.html">Trending</a>
-                    <a href="index.html">SALE</a>
-                    <a href="index.html">Products</a>
-                    <a href="join-us.html">Join Us!</a>
+                    <a href="index.php" id="header-logo">Memeology</a>
+                    <a href="products.php?productfilter=Trending">Trending</a>
+                    <a href="products.php?productfilter=Sale">SALE</a>
+                    <a href="products.php?productfilter=All">Products</a>
+                    <a href="memeology-it.php">Submit Your Design!</a>
                     <div class="search-container">
                         <form>
                           <input type="text" placeholder="Search..." name="search">
@@ -22,9 +22,9 @@
                         </form>
                     </div>
                     <div class="account-info">
-                        <a href="index.html"><img src="img/wishlist.png" width="30" height="30"></a>
+                        <a href="index.php"><img src="img/wishlist.png" width="30" height="30"></a>
                         <a href="my-cart.php"><img src="img/cart-icon-28356.png" width="30" height="30"></a> 
-                        <a href="login.html"><img src="img/user-icon.png" width="30" height="30"></a>
+                        <a href="login-main.php"><img src="img/user-icon.png" width="30" height="30"></a>
                     </div>
                 </nav>
             </header>
@@ -86,23 +86,23 @@
                     </div>
                     <div class="column-5">
                         <h3>Menu</h3>
-                        <p><a href="index.html">Trending</a></p>
-                        <p><a href="index.html">SALE</a></p>
-                        <p><a href="index.html">Products</a></p>
-                        <p><a href="join-us.html">Join Us</a></p>
+                        <p><a href="products.php?productfilter=Trending">Trending</a></p>
+                        <p><a href="products.php?productfilter=Sale">SALE</a></p>
+                        <p><a href="products.php?productfilter=All">Products</a></p>
+                        <p><a href="memeology-it.php">MemeologyIt</a></p>
                     </div>
                     <div class="column-5">
                         <h3>Account</h3>
-                        <p><a href="index.html">My Account</a></p>
-                        <p><a href="index.html">Checkout</a></p>
+                        <p><a href="login-main.php">My Account</a></p>
+                        <p><a href="my-cart.php">Checkout</a></p>
                         <p><a href="my-cart.php">My Cart</a></p>
-                        <p><a href="index.html">My Wishlist</a></p>
+                        <p><a href="index.php">My Wishlist</a></p>
                     </div>
                     <div class="column-5">
                         <h3>Folow Us</h3>
-                        <p><a href="index.html">Facebook</a></p>
-                        <p><a href="index.html">Instagram</a></p>
-                        <p><a href="index.html">Twitter</a></p>
+                        <p><a href="index.php">Facebook</a></p>
+                        <p><a href="index.php">Instagram</a></p>
+                        <p><a href="index.php">Twitter</a></p>
                     </div>
                     <div class="column-5">
                         <h3>Stay Connected</h3>

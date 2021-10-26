@@ -123,14 +123,14 @@ if (isset($_GET['productfilter'])) {
                     </div>
                     <div class="column-5">
                         <h3>Menu</h3>
-                        <p><a href="products.php">Trending</a></p>
-                        <p><a href="products.php">SALE</a></p>
-                        <p><a href="products.php">Products</a></p>
+                        <p><a href="products.php?productfilter=Trending">Trending</a></p>
+                        <p><a href="products.php?productfilter=Sale">SALE</a></p>
+                        <p><a href="products.php?productfilter=All">Products</a></p>
                         <p><a href="memeology-it.php">MemeologyIt</a></p>
                     </div>
                     <div class="column-5">
                         <h3>Account</h3>
-                        <p><a href="my-account.php">My Account</a></p>
+                        <p><a href="login-main.php">My Account</a></p>
                         <p><a href="my-cart.php">Checkout</a></p>
                         <p><a href="my-cart.php">My Cart</a></p>
                         <p><a href="index.php">My Wishlist</a></p>
