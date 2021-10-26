@@ -3,15 +3,21 @@ session_start();
 if(!isset($_SESSION["sess_user"])){  
     header("location:login-main.php");  
 } else{
+    if (!isset($_SESSION['cart'])){
+        $_SESSION['cart'] = array();
+    };
+    if (isset($_GET['empty'])) {
+        unset($_SESSION['cart']);
+        header('location: ' . $_SERVER['PHP_SELF']);
+        exit();
+    };
 ?>
 <!DOCTYPE html>
-<!-- Added My Cart Page -->
-<!-- Changed relevant links to my-cart.html and join-us.html-->
 <html lang="en">
     <head>
         <title>Memeology</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
     </head>
     <body>
         <div id="wrapper">
@@ -36,19 +42,56 @@ if(!isset($_SESSION["sess_user"])){
                 </nav>
             </header>
             <div>
-                
-            </div>
-            <div>
                 <div class="content">
-                    <p>My Cart. Welcome
-                    <?=$_SESSION['sess_user'];?>! <a href="logout.php">Logout</a></p>
+                    <h2>Viewing
+                    <?=$_SESSION['sess_user'];?>'s Cart</h2>
+                    <h4><a href="logout.php">Logout</a></h4>
                     <div class="my-cart">
-                        <div class="my-cart-items">
-                            Put items
-                        </div>
-                        <div class="my-cart-total">
-                            Put subtotal
-                        </div>
+                        <table class="product-table">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                include "dbconnect.php";
+                                $total = 0;
+                                for ($i=0; $i < count($_SESSION['cart']); $i++){
+                                    $productSKU = $_SESSION['cart'][$i];
+                                    $sql = "SELECT ProductSKU, ProductName, ProductImage, ProductDescription, Price
+                                    FROM products
+                                    WHERE ProductSKU='$productSKU'";
+                                    $result = $dbcnx->query($sql);
+                                    if (!$result){
+                                        echo "query_failed";
+                                    }
+                                    else{
+                                        $row = $result->fetch_assoc();
+                                        echo "<tr>";
+                                        echo "<td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:10vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td>";
+                                        echo "<td>" .$row['ProductName']. "</td>";
+                                        echo "<td align='right'>$";
+                                        echo $row['Price']. "</td>";
+                                        echo "</tr>";
+                                        $total = $total + $row['Price'];
+                                    };
+                                }
+                                ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th align='right'></th><br>
+                                    <th align='right'>Total:</th><br>
+                                    <th align='right'>$<?php echo number_format($total, 2) ?>
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <p><a href="products.php">Continue Shopping</a> or
+                        <a href="<?php echo $_SERVER['PHP_SELF']; ?>?empty=1">Empty your cart</a></p>
                     </div>
                     
                 </div>

@@ -3,6 +3,14 @@ session_start();
 if (isset($_GET['productfilter'])) {
     $_SESSION['productfilter'] = $_GET['productfilter'];
     };
+if (!isset($_SESSION['cart'])){
+    $_SESSION['cart'] = array();
+    };
+if (isset($_GET['buy'])) {
+    $_SESSION['cart'][] = $_GET['buy'];
+    header('location: ' . $_SERVER['PHP_SELF']. '?' . SID);
+    exit();
+    };
 ?>
 <!DOCTYPE html>
 <!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
@@ -58,47 +66,47 @@ if (isset($_GET['productfilter'])) {
                     <?php
                             include "dbconnect.php";
                             if ($_SESSION['productfilter']=="All") {
-                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                $sql = "SELECT ProductSKU, ProductName, ProductImage, ProductDescription, Price
                                 FROM products";
                             }
                             elseif ($_SESSION['productfilter']=="T-Shirt") {
-                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                $sql = "SELECT ProductSKU, ProductName, ProductImage, ProductDescription, Price
                                 FROM products
                                 WHERE ProductCategory= 'T-Shirt' ";
                             }
                             elseif ($_SESSION['productfilter']=="Mug") {
-                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                $sql = "SELECT ProductSKU, ProductName, ProductImage, ProductDescription, Price
                                 FROM products
                                 WHERE ProductCategory= 'Mug' ";
                             }
                             elseif ($_SESSION['productfilter']=="Cover") {
-                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                $sql = "SELECT ProductSKU, ProductName, ProductImage, ProductDescription, Price
                                 FROM products
                                 WHERE ProductCategory= 'Cover' ";
                             }
                             elseif ($_SESSION['productfilter']=="Other") {
-                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                $sql = "SELECT ProductSKU, ProductName, ProductImage, ProductDescription, Price
                                 FROM products
                                 WHERE ProductCategory= 'Other' ";
                             }
                             elseif ($_SESSION['productfilter']=="Trending") {
-                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                $sql = "SELECT ProductSKU, ProductName, ProductImage, ProductDescription, Price
                                 FROM products
                                 WHERE Trending=TRUE ";
                             }
                             elseif ($_SESSION['productfilter']=="Sale") {
-                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                $sql = "SELECT ProductSKU, ProductName, ProductImage, ProductDescription, Price
                                 FROM products
                                 WHERE Sale=TRUE";
                             }
                             elseif ($_SESSION['productfilter']=="SpecialCollection") {
-                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                $sql = "SELECT ProductSKU, ProductName, ProductImage, ProductDescription, Price
                                 FROM products
                                 WHERE SpecialCollection=TRUE";
                             }
                             else {
                                 $productSKU = $_SESSION['productfilter'];
-                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                $sql = "SELECT ProductSKU, ProductName, ProductImage, ProductDescription, Price
                                 FROM products
                                 WHERE ProductSKU='$productSKU'";
                             };
@@ -146,6 +154,10 @@ if (isset($_GET['productfilter'])) {
                             };
                         ?>
                         </h2>
+                        <p>Your shopping cart contains 
+                            <?php echo count($_SESSION['cart']); ?> 
+                            items.</p>
+                        <p><a href="my-cart.php">View My Cart</a></p>
                         <table class="product-table">
                         <tr>
                             <th>Product</th>
@@ -155,9 +167,9 @@ if (isset($_GET['productfilter'])) {
                             <th>Add To Cart</th>
                         </tr>
                         <?php
-                            echo "<tr><td>" . $row['ProductName'] . "</td><td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:15vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td><td><a href='my-cart.php'>Add</a></td></tr>";
+                            echo "<tr><td>" . $row['ProductName'] . "</td><td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:15vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td><td><a href='" .$_SERVER['PHP_SELF']. '?buy=' .$row['ProductSKU']. "'><img src='img/cart-icon-28356.png' width='30' height='30'></a></td></tr>";
                             while($row = $result->fetch_assoc()){   //Creates a loop to loop through results
-                                echo "<tr><td>" . $row['ProductName'] . "</td><td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:15vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td><td><a href='my-cart.php'>Add</a></td></tr>";
+                                echo "<tr><td>" . $row['ProductName'] . "</td><td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:15vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td><td><a href='" .$_SERVER['PHP_SELF']. '?buy=' .$row['ProductSKU']. "'><img src='img/cart-icon-28356.png' width='30' height='30'></a></td></tr>";
                                 }
                         ?>
                         </table>

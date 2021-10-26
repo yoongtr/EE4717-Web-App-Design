@@ -3,6 +3,14 @@ session_start();
 if (isset($_GET['productfilter'])) {
     $_SESSION['productfilter'] = $_GET['productfilter'];
     };
+if (!isset($_SESSION['cart'])){
+    $_SESSION['cart'] = array();
+    };
+if (isset($_GET['buy'])) {
+    $_SESSION['cart'][] = $_GET['buy'];
+    header('location: ' . $_SERVER['PHP_SELF']. '?' . SID);
+    exit();
+    };
 // echo var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
@@ -98,7 +106,7 @@ if (isset($_GET['productfilter'])) {
                                     <td>
                                     <?php
                                     include "dbconnect.php";
-                                    $sql0 = "SELECT ProductName, ProductImage, ProductDescription, Price, Sale 
+                                    $sql0 = "SELECT * 
                                     FROM products
                                     WHERE ProductSKU = '001_Fan' ";
                                     $result0 = $dbcnx->query($sql0);
@@ -114,7 +122,7 @@ if (isset($_GET['productfilter'])) {
                                     </td>
                                     <td>
                                     <?php
-                                    $sql1 = "SELECT ProductName, ProductImage, ProductDescription, Price, Sale 
+                                    $sql1 = "SELECT * 
                                     FROM products
                                     WHERE ProductSKU = '005_PepeShirt_S' ";
                                     $result1 = $dbcnx->query($sql1);
@@ -130,7 +138,7 @@ if (isset($_GET['productfilter'])) {
                                     </td>
                                     <td>
                                     <?php
-                                    $sql2 = "SELECT ProductName, ProductImage, ProductDescription, Price, Sale 
+                                    $sql2 = "SELECT * 
                                     FROM products
                                     WHERE ProductSKU = '009_WomenCat' ";
                                     $result2 = $dbcnx->query($sql2);
@@ -146,7 +154,7 @@ if (isset($_GET['productfilter'])) {
                                     </td>
                                     <td>
                                     <?php
-                                    $sql3 = "SELECT ProductName, ProductImage, ProductDescription, Price, Sale 
+                                    $sql3 = "SELECT * 
                                     FROM products
                                     WHERE ProductSKU = '006_FineMug' ";
                                     $result3 = $dbcnx->query($sql3);
@@ -187,7 +195,9 @@ if (isset($_GET['productfilter'])) {
                                             ?>
                                         </p>
                                         <p>
-                                            <a href="my-cart.php">Add to cart</p>
+                                            <?php
+                                            echo "<a href='" .$_SERVER['PHP_SELF']. '?buy=' .$row0['ProductSKU']. "'>Add to cart</a>"
+                                            ?>
                                         </p>
                                     </td>
                                     <td class="home-desc">
@@ -215,7 +225,10 @@ if (isset($_GET['productfilter'])) {
                                             ?>
                                         </p>
                                         <p>
-                                            <a href="my-cart.php">Add to cart</p>
+                                            <?php
+                                            // echo "<a>".$row1['ProductSKU']."</a>";
+                                            echo "<a href='" .$_SERVER['PHP_SELF']. '?buy=' .$row1['ProductSKU']. "'>Add to cart</a>";
+                                            ?>
                                         </p>
                                     </td>
                                     <td class="home-desc">
@@ -243,7 +256,9 @@ if (isset($_GET['productfilter'])) {
                                             ?>
                                         </p>
                                         <p>
-                                            <a href="my-cart.php">Add to cart</p>
+                                            <?php
+                                            echo "<a href='" .$_SERVER['PHP_SELF']. '?buy=' .$row2['ProductSKU']. "'>Add to cart</a>"
+                                            ?>
                                         </p>
                                     </td>
                                     <td class="home-desc">
@@ -271,7 +286,9 @@ if (isset($_GET['productfilter'])) {
                                             ?>
                                         </p>
                                         <p>
-                                            <a href="my-cart.php">Add to cart</p>
+                                            <?php
+                                            echo "<a href='" .$_SERVER['PHP_SELF']. '?buy=' .$row3['ProductSKU']. "'>Add to cart</a>"
+                                            ?>
                                         </p>
                                     </td>
                                 </tr>

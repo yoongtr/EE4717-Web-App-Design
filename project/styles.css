@@ -268,33 +268,16 @@ button {
     display: inline-block;
     font-size: 16px;
 }
+
 /* MY CART PAGE */
-.my-cart{
-    display: flex;
+.my-cart {
+    padding: 50px;
 }
-.my-cart-items, .my-cart-total{
-    border: 1px solid black;
-    min-height: 200px;
-}
-
-.my-cart-items{
-    min-width: 80%
-}
-
-.my-cart-total{
-    min-width: 18%;
-}
-
-.my-cart-total{
-    margin-left: 20px;
-}
-
 
 /* JOIN US PAGE */
 .join-us-header{
     text-align: center;
 }
-
 .join-us-header h1{
     font-size: 60px;
     font-weight: 440;
@@ -312,25 +295,21 @@ button {
     background-color: white;
     border: 1px solid black;
     padding: 50px;
-  }
-  
+}
 .join-us-form-box .inputBox{
     position: relative;
     margin: 0 0 35px 0;
     padding: 10px 0;
     border: 1px solid black;
-  }
-  
+}
 .join-us-form-box .inputBox.w50{
     width: 47%;
-  }
-  
+}
   .join-us-form-box .inputBox.w100{
     width: 100%;
-  }
-  
-  .join-us-form-box .inputBox input,
-  .join-us-form-box .inputBox textarea{
+} 
+.join-us-form-box .inputBox input,
+.join-us-form-box .inputBox textarea{
     width: 100% !important;
     padding: 5px 0;
     resize: none;
@@ -341,13 +320,11 @@ button {
     /* border-bottom: 1px solid #777; */
     outline: none;
     background:transparent;
-  }
-  
-  .join-us-form-box .inputBox textarea{
+}
+.join-us-form-box .inputBox textarea{
     min-height: 120px;
-  }
-  
-  .join-us-form-box .inputBox span{
+}
+.join-us-form-box .inputBox span{
     position: absolute;
     left: 0;
     padding: 5px;
@@ -356,19 +333,17 @@ button {
     color: black;
     transition: 0.3s;
     pointer-events: none;
-  }
-  
-  .join-us-form-box .inputBox input:focus ~ span,
-  .join-us-form-box .inputBox textarea:focus ~ span,
-  .join-us-form-box .inputBox input:valid ~ span,
-  .join-us-form-box .inputBox textarea:valid ~ span{
+}
+.join-us-form-box .inputBox input:focus ~ span,
+.join-us-form-box .inputBox textarea:focus ~ span,
+.join-us-form-box .inputBox input:valid ~ span,
+.join-us-form-box .inputBox textarea:valid ~ span{
     transform: translateY(-35px);
     font-size: 12px;
     font-weight: 400;
     letter-spacing: 1px;
     color: #757575;
-  }
-  
+}
 .join-us-form  .inputBox input[type="submit"]{
     position: relative;
     font-size: 16px;
@@ -380,12 +355,11 @@ button {
     margin-top: 20px;
     padding: 12px 20px;
     opacity: 0.9;
-  }
-  
+}
 .inputBox input[type="submit"]:hover{
     background: #777;
     color: black;
-  }
+}
 
 /* LOGIN PAGE */
 
@@ -400,20 +374,16 @@ button {
     border: 1px solid black;
     padding: 50px 80px;
   }
-
 .login-form-input{
   margin: 10px 0;
 }
-
 .login-form-input input{
   float: right;
   width: 60%;
 }
-
 .login-form-submit{
   text-align: center;
 }
-
 .login-form-submit input{
   padding: 10px 40px;
   margin-top: 20px;
@@ -436,7 +406,7 @@ button {
     float: left;
     padding: 50px;
     height: 100%;
-    font-size: 150%;
+    font-size: 110%;
     text-decoration: none;
 }
 .product-leftcol a {
