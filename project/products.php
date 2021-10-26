@@ -10,7 +10,7 @@ if (isset($_GET['productfilter'])) {
     <head>
         <title>Memeology</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
     </head>
     <body>
         <div id="wrapper">
@@ -36,79 +36,132 @@ if (isset($_GET['productfilter'])) {
             </header>
 
             <div>
-                <div class="content">
-                    <!-- <p><?php var_dump($_SESSION); ?></p> -->
-                    <!-- <p><?php echo $_SESSION['productfilter']=='Sale'; ?></p> -->
-                    <div>
-                        <p>Filter Product By Category</p>
-                        <a href="products.php?productfilter=All">All Products</a><br>
-                        <a href="products.php?productfilter=Sale">SALE</a><br>
-                        <a href="products.php?productfilter=Trending">Trending</a><br>
-                        <a href="products.php?productfilter=Cover">Cover</a><br>
-                        <a href="products.php?productfilter=Mug">Mug</a><br>
-                        <a href="products.php?productfilter=T-Shirt">T-Shirt</a><br>
-                        <a href="products.php?productfilter=Other">Other</a><br>
+                <!-- <p><?php var_dump($_SESSION); ?></p> -->
+                <!-- <p><?php echo $_SESSION['productfilter']=='Sale'; ?></p> -->
+                <div class="product-leftcol">
+                    <div class="product-filternav">
+                    <h4>Filter Product By</h4>
+                    <ul>
+                        <li><a href="products.php?productfilter=All">All Products</a></li>
+                        <li><a href="products.php?productfilter=Sale">SALE</a></li>
+                        <li><a href="products.php?productfilter=Trending">Trending</a></li>
+                        <li><a href="products.php?productfilter=SpecialCollection">Special Collection</a></li>
+                        <li><a href="products.php?productfilter=Cover">Cover</a></li>
+                        <li><a href="products.php?productfilter=Mug">Mug</a></li>
+                        <li><a href="products.php?productfilter=T-Shirt">T-Shirt</a></li>
+                        <li><a href="products.php?productfilter=Other">Other</a></li>
+                    </ul>
                     </div>
-                    <table>
+                </div>
+                <div class="product-rightcol">
+                    <div class="content">
                     <?php
-                        include "dbconnect.php";
-                        if ($_SESSION['productfilter']=="All") {
-                            $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
-                            FROM products";
-                        }
-                        elseif ($_SESSION['productfilter']=="T-Shirt") {
-                            $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
-                            FROM products
-                            WHERE ProductCategory= 'T-Shirt' ";
-                        }
-                        elseif ($_SESSION['productfilter']=="Mug") {
-                            $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
-                            FROM products
-                            WHERE ProductCategory= 'Mug' ";
-                        }
-                        elseif ($_SESSION['productfilter']=="Cover") {
-                            $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
-                            FROM products
-                            WHERE ProductCategory= 'Cover' ";
-                        }
-                        elseif ($_SESSION['productfilter']=="Other") {
-                            $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
-                            FROM products
-                            WHERE ProductCategory= 'Other' ";
-                        }
-                        elseif ($_SESSION['productfilter']=="Trending") {
-                            $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
-                            FROM products
-                            WHERE Trending=TRUE ";
-                        }
-                        elseif ($_SESSION['productfilter']=="Sale") {
-                            $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
-                            FROM products
-                            WHERE Sale=TRUE";
-                        }
-                        else {
-                            $productSKU = $_SESSION['productfilter'];
-                            $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
-                            FROM products
-                            WHERE ProductSKU='$productSKU'";
-                        };
+                            include "dbconnect.php";
+                            if ($_SESSION['productfilter']=="All") {
+                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                FROM products";
+                            }
+                            elseif ($_SESSION['productfilter']=="T-Shirt") {
+                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                FROM products
+                                WHERE ProductCategory= 'T-Shirt' ";
+                            }
+                            elseif ($_SESSION['productfilter']=="Mug") {
+                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                FROM products
+                                WHERE ProductCategory= 'Mug' ";
+                            }
+                            elseif ($_SESSION['productfilter']=="Cover") {
+                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                FROM products
+                                WHERE ProductCategory= 'Cover' ";
+                            }
+                            elseif ($_SESSION['productfilter']=="Other") {
+                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                FROM products
+                                WHERE ProductCategory= 'Other' ";
+                            }
+                            elseif ($_SESSION['productfilter']=="Trending") {
+                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                FROM products
+                                WHERE Trending=TRUE ";
+                            }
+                            elseif ($_SESSION['productfilter']=="Sale") {
+                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                FROM products
+                                WHERE Sale=TRUE";
+                            }
+                            elseif ($_SESSION['productfilter']=="SpecialCollection") {
+                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                FROM products
+                                WHERE SpecialCollection=TRUE";
+                            }
+                            else {
+                                $productSKU = $_SESSION['productfilter'];
+                                $sql = "SELECT ProductName, ProductImage, ProductDescription, Price
+                                FROM products
+                                WHERE ProductSKU='$productSKU'";
+                            };
 
-                        $result = $dbcnx->query($sql);
-                        // echo $result;
-                        if (!$result){
-                            echo "query_failed";
-                        }
-                        else{
-                            $row = $result->fetch_assoc();
-                            // echo "<script>console.log($row);</script>";
-                            echo "<tr><td>" . $row['ProductName'] . "</td><td>" . 'image' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td></tr>";
-                            while($row = $result->fetch_assoc()){   //Creates a loop to loop through results
-                                echo "<script>console.log('count');</script>";
-                                echo "<tr><td>" . $row['ProductName'] . "</td><td>" . 'image' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td></tr>";
-                                }
-                        };
+                            $result = $dbcnx->query($sql);
+                            // echo $result;
+                            if (!$result){
+                                echo "query_failed";
+                            }
+                            else{
+                                $row = $result->fetch_assoc();
+                            };
                         ?>
-                    </table>
+                        <h2>Showing result(s) for
+                        <?php
+                            if ($_SESSION['productfilter']=="All") {
+                                echo $_SESSION['productfilter'];
+                                echo ' Products';
+                            }
+                            elseif ($_SESSION['productfilter']=="T-Shirt") {
+                                echo $_SESSION['productfilter'];
+                            }
+                            elseif ($_SESSION['productfilter']=="Mug") {
+                                echo $_SESSION['productfilter'];
+                            }
+                            elseif ($_SESSION['productfilter']=="Cover") {
+                                echo $_SESSION['productfilter'];
+                            }
+                            elseif ($_SESSION['productfilter']=="Other") {
+                                echo $_SESSION['productfilter'];
+                            }
+                            elseif ($_SESSION['productfilter']=="Trending") {
+                                echo $_SESSION['productfilter'];
+                                echo ' Products';
+                            }
+                            elseif ($_SESSION['productfilter']=="Sale") {
+                                echo $_SESSION['productfilter'];
+                                echo ' Products';
+                            }
+                            elseif ($_SESSION['productfilter']=="SpecialCollection") {
+                                echo ' Memeology x Louvre Fashion Collection';
+                            }
+                            else {
+                                echo $row['ProductName'];
+                            };
+                        ?>
+                        </h2>
+                        <table class="product-table">
+                        <tr>
+                            <th>Product</th>
+                            <th>Image</th>
+                            <th>Description</th>
+                            <th>Price (SGD)</th>
+                            <th>Add To Cart</th>
+                        </tr>
+                        <?php
+                            echo "<tr><td>" . $row['ProductName'] . "</td><td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:15vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td><td><a href='my-cart.php'>Add</a></td></tr>";
+                            while($row = $result->fetch_assoc()){   //Creates a loop to loop through results
+                                echo "<tr><td>" . $row['ProductName'] . "</td><td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:15vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td><td><a href='my-cart.php'>Add</a></td></tr>";
+                                }
+                        ?>
+                        </table>
+                    </div>
                 </div>
             </div>
             <footer>
