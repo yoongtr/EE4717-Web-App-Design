@@ -1,20 +1,26 @@
+<?php   
+session_start();  
+if(!isset($_SESSION["sess_user"])){  
+    header("location:login-main.php");  
+} else{
+?>
 <!DOCTYPE html>
 <!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
 <html lang="en">
     <head>
-        <title>Memeology</title>
+        <title>Memeology It | Memeology</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
     </head>
     <body>
         <div id="wrapper">
             <header>
                 <nav>
-                    <a href="index.php" id="header-logo">Memeology</a>
-                    <a href="products.php?productfilter=Trending">Trending</a>
-                    <a href="products.php?productfilter=Sale">SALE</a>
-                    <a href="products.php?productfilter=All">Products</a>
-                    <a href="memeology-it.php">Submit Your Design!</a>
+                    <a href="index.html" id="header-logo">Memeology</a>
+                    <a href="index.html">Trending</a>
+                    <a href="index.html">SALE</a>
+                    <a href="index.html">Products</a>
+                    <a href="join-us.html">Join Us!</a>
                     <div class="search-container">
                         <form>
                           <input type="text" placeholder="Search..." name="search">
@@ -22,9 +28,9 @@
                         </form>
                     </div>
                     <div class="account-info">
-                        <a href="index.php"><img src="img/wishlist.png" width="30" height="30"></a>
+                        <a href="index.html"><img src="img/wishlist.png" width="30" height="30"></a>
                         <a href="my-cart.php"><img src="img/cart-icon-28356.png" width="30" height="30"></a> 
-                        <a href="login-main.php"><img src="img/user-icon.png" width="30" height="30"></a>
+                        <a href="login.html"><img src="img/user-icon.png" width="30" height="30"></a>
                     </div>
                 </nav>
             </header>
@@ -33,42 +39,53 @@
             </div>
             <div>
                 <div class="content">
-                    <div class="join-us-header">
-                        <h1>Start your career with the Memeology Team!</h1>
-                        <p>We don't bite:)</p>
+                    <div class="memeology-header">
+                        <h1>#MemeologyIt</h1>
+                        <p>Why be normal when you can be a meme god</p>
+                        <!-- <img src="./img/memeologyit.png"> -->
                     </div>
-                    <div class="join-us-form">
-                        <form>
-                            <div class="join-us-form-box">
-                                <div class="inputBox w50">
-                                  <input type="text" id="Name" name="Name" required>
-                                  <span>First Name</span>
+                    <div class="memeology-form">
+                        <form action="memeology-submit.php" method="POST">
+                            <div class="memeology-form-details">
+                                <div class="memeology-selections">
+                                    <div class="memeology-item options">
+                                        <select name="myItem" id="myItem">
+                                            <option value="">Pick an Item</option>  
+                                            <option value="T-Shirt">T-Shirt</option>
+                                            <option value="Mug">Mug</option>
+                                            <option value="Mousepad">Mousepad</option>
+                                        </select>
+                                    </div>
+                                    <div class="memeology-colours options">
+                                        <select name="myColour" id="myColour">
+                                            <option value="">Choose a Colour</option>  
+                                            <option value="Red">Red</option>
+                                            <option value="Blue">Blue</option>
+                                            <option value="Green">Green</option>
+                                        </select>
+                                    </div>
+                                    <div class="memeology-meme options">
+                                        <input type="file" id="myMeme" name="myMeme">
+                                    </div>
                                 </div>
-                                <div class="inputBox w50">
-                                  <input type="text" id="lastName" name="Last Name" required>
-                                  <span>Last Name</span>
+                                <div class="memeology-price">
+                                    <p>Options Selected</p>
+                                    <table>
+                                        <tr><td>Choice Price:</td><td id="itemPrice">0</td></tr>
+                                        <tr><td>Colour Price:</td><td id="colourChoice">0</td></tr>
+                                        <tr><td>Total Price:</td><td id="totalPrice">0</td></tr>
+                                    </table>
                                 </div>
-                                <div class="inputBox w50">
-                                  <input type="email" id="email" name="Email" required>
-                                  <span>Email Address</span>
-                                </div>
-                                <div class="inputBox w50">
-                                  <input type="number" id="number" name="Number" required>
-                                  <span>Mobile Number</span>
-                                </div>
-                                <div class="inputBox w50">
-                                    <input type="text" id="subject" name="subject" required>
-                                    <span>Subject</span>
-                                  </div>
-                                <div class="inputBox w100">
-                                  <textarea id="Message" name="Message" required></textarea>
-                                  <span>Message (including work experience here)</span>
-                                </div>  
-                              </div>
-                              <div class="inputBox w100">
-                                <input type="submit" id="form-submit" value="Submit Application">
-                              </div>
-                              <div id="msgSubmit" class="h3 text-center hidden"></div>
+                            </div>
+                            <div class="memeology-address">
+                                <textarea id="myAddress" name="myAddress" required placeholder="Please Input Address"></textarea>
+                            </div>
+                            <div class="memeology-comments">
+                                <textarea id="myComments" name="myComments" required placeholder="Any Additional Comments"></textarea>
+                            </div>
+                            <div class="submitbutton">
+                               <input type="submit" id="submit" name="submit" value="Submit Application">
+                             </div>
                         </form>
                     </div>
                 </div>
@@ -86,23 +103,23 @@
                     </div>
                     <div class="column-5">
                         <h3>Menu</h3>
-                        <p><a href="products.php?productfilter=Trending">Trending</a></p>
-                        <p><a href="products.php?productfilter=Sale">SALE</a></p>
-                        <p><a href="products.php?productfilter=All">Products</a></p>
-                        <p><a href="memeology-it.php">MemeologyIt</a></p>
+                        <p><a href="index.html">Trending</a></p>
+                        <p><a href="index.html">SALE</a></p>
+                        <p><a href="index.html">Products</a></p>
+                        <p><a href="join-us.html">Join Us</a></p>
                     </div>
                     <div class="column-5">
                         <h3>Account</h3>
-                        <p><a href="login-main.php">My Account</a></p>
-                        <p><a href="my-cart.php">Checkout</a></p>
+                        <p><a href="index.html">My Account</a></p>
+                        <p><a href="index.html">Checkout</a></p>
                         <p><a href="my-cart.php">My Cart</a></p>
-                        <p><a href="index.php">My Wishlist</a></p>
+                        <p><a href="index.html">My Wishlist</a></p>
                     </div>
                     <div class="column-5">
                         <h3>Folow Us</h3>
-                        <p><a href="index.php">Facebook</a></p>
-                        <p><a href="index.php">Instagram</a></p>
-                        <p><a href="index.php">Twitter</a></p>
+                        <p><a href="index.html">Facebook</a></p>
+                        <p><a href="index.html">Instagram</a></p>
+                        <p><a href="index.html">Twitter</a></p>
                     </div>
                     <div class="column-5">
                         <h3>Stay Connected</h3>
@@ -114,5 +131,52 @@
                 </div>
             </footer>
         </div>
+        <script>
+             var pricing = "0"
+             var colouring = "0";
+             total = 0;
+            function checkPrice(){
+                var itemSelec = document.querySelector('select[id="myItem"]');
+                itemSelec = itemSelec.value;
+                if (itemSelec == "T-Shirt"){
+                    pricing = "15.00";
+                }
+                else if(itemSelec == "Mug"){
+                    pricing = "5.00";
+                }
+                else if(itemSelec == "Mousepad"){
+                    pricing = "10.00";
+                }              
+                document.getElementById("itemPrice").innerHTML = "$ " + pricing;
+                total = parseFloat(pricing)+ parseFloat(colouring)     ;
+                total = String(total);
+                document.getElementById("totalPrice").innerHTML = "$ " + total;
+            }
+            function checkColour(){
+                var colourSelec = document.querySelector('select[id="myColour"]');
+                colourSelec = colourSelec.value;
+                
+                if (colourSelec == "Red" ){
+                    colouring = "2.50";
+                }
+                else if(colourSelec == "Green"){
+                    colouring = "3.00";
+                }
+                else if(colourSelec == "Blue"){
+                    colouring = "3.50";
+                }
+                document.getElementById("colourChoice").innerHTML = "$ " + colouring;
+                total = parseFloat(colouring) + parseFloat(pricing) ;
+                total = String(total);
+                document.getElementById("totalPrice").innerHTML = "$ " + total;
+            }
+            var items = document.getElementById("myItem");
+            var colours = document.getElementById("myColour");
+            items.addEventListener("change", checkPrice, false);
+            colours.addEventListener("change", checkColour, false);
+        </script>
     </body>
 </html>
+<?php
+}
+?>
