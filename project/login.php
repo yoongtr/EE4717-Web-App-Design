@@ -25,10 +25,13 @@ if ($result!=0){
         $_SESSION['sess_user']=$username;  
     
         /* Redirect browser */  
-        header("Location: my-cart.php");  
-        }  
+        header("Location: my-account.php");  
+        }
+    else{
+        header("Location:login-fail.html");
+    }  
     } 
 else {  
-    echo "Invalid username or password!";  
+    header("Location:login-main.php");  
     }
 ?>
