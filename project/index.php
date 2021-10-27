@@ -1,25 +1,60 @@
 <?php   
 session_start();
+include "dbconnect.php";
 if (isset($_GET['productfilter'])) {
     $_SESSION['productfilter'] = $_GET['productfilter'];
     };
-if (!isset($_SESSION['cart'])){
-    $_SESSION['cart'] = array();
+if (!isset($_SESSION['cart_item'])){
+    $_SESSION['cart_item'] = array();
     };
-if (isset($_GET['buy'])) {
-    $_SESSION['cart'][] = $_GET['buy'];
+if(isset($_GET["action"])) {
+    switch($_GET["action"]) {
+        case "add":
+            if(!empty($_POST["Quantity"])) {
+                $productBySKU = $dbcnx->query("SELECT * FROM products WHERE ProductSKU='" . $_GET["ProductSKU"] . "'");
+                $productBySKU_row = $productBySKU->fetch_assoc();
+                $itemArray = array($productBySKU_row["ProductSKU"]=>array('ProductName'=>$productBySKU_row["ProductName"], 'ProductSKU'=>$productBySKU_row["ProductSKU"], 'Quantity'=>$_POST["Quantity"]));
+                if(!empty($_SESSION["cart_item"])) {
+                    if(in_array($productBySKU_row["ProductSKU"],array_keys($_SESSION["cart_item"]))) {
+                        foreach($_SESSION["cart_item"] as $k => $v) {
+                                if($productBySKU_row["ProductSKU"] == $k) {
+                                    if(empty($_SESSION["cart_item"][$k]["Quantity"])) {
+                                        $_SESSION["cart_item"][$k]["Quantity"] = 0;
+                                    }
+                                    $_SESSION["cart_item"][$k]["Quantity"] += $_POST["Quantity"];
+                                }
+                        }
+                    } else {
+                        $_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray);
+                    }
+                } else {
+                    $_SESSION["cart_item"] = $itemArray;
+                }
+            }
+        break;
+        case "remove":
+            if(!empty($_SESSION["cart_item"])) {
+                foreach($_SESSION["cart_item"] as $k => $v) {
+                        if($_GET["ProductSKU"] == $k)
+                            unset($_SESSION["cart_item"][$k]);				
+                        if(empty($_SESSION["cart_item"]))
+                            unset($_SESSION["cart_item"]);
+                }
+            }
+        break;
+        case "empty":
+            unset($_SESSION["cart_item"]);
+        break;	
+    }
     header('location: ' . $_SERVER['PHP_SELF']. '?' . SID);
     exit();
-    };
-// echo var_dump($_SESSION);
+}
 ?>
 <!DOCTYPE html>
-<!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
 <html lang="en">
     <head>
         <title>Memeology</title>
         <meta charset="utf-8">
-        <!-- <link rel="stylesheet" href="styles.css"> -->
         <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
     </head>
     <body>
@@ -194,11 +229,6 @@ if (isset($_GET['buy'])) {
                                             echo $row0['Price'];
                                             ?>
                                         </p>
-                                        <p>
-                                            <?php
-                                            echo "<a href='" .$_SERVER['PHP_SELF']. '?buy=' .$row0['ProductSKU']. "'>Add to cart</a>"
-                                            ?>
-                                        </p>
                                     </td>
                                     <td class="home-desc">
                                         <h4>
@@ -224,12 +254,6 @@ if (isset($_GET['buy'])) {
                                             echo $row1['Price'];
                                             ?>
                                         </p>
-                                        <p>
-                                            <?php
-                                            // echo "<a>".$row1['ProductSKU']."</a>";
-                                            echo "<a href='" .$_SERVER['PHP_SELF']. '?buy=' .$row1['ProductSKU']. "'>Add to cart</a>";
-                                            ?>
-                                        </p>
                                     </td>
                                     <td class="home-desc">
                                         <h4>
@@ -253,11 +277,6 @@ if (isset($_GET['buy'])) {
                                             SGD $
                                             <?php
                                             echo $row2['Price'];
-                                            ?>
-                                        </p>
-                                        <p>
-                                            <?php
-                                            echo "<a href='" .$_SERVER['PHP_SELF']. '?buy=' .$row2['ProductSKU']. "'>Add to cart</a>"
                                             ?>
                                         </p>
                                     </td>
@@ -286,12 +305,32 @@ if (isset($_GET['buy'])) {
                                             ?>
                                         </p>
                                         <p>
-                                            <?php
-                                            echo "<a href='" .$_SERVER['PHP_SELF']. '?buy=' .$row3['ProductSKU']. "'>Add to cart</a>"
-                                            ?>
+                                            
                                         </p>
                                     </td>
                                 </tr>
+                                <!-- <tr class="row-2">
+                                    <td>
+                                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>?action=add&ProductSKU=<?php echo $row0["ProductSKU"]; ?>">
+                                            <?php echo "<input type='text' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/></td></tr>";?>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>?action=add&ProductSKU=<?php echo $row1["ProductSKU"]; ?>">
+                                            <?php echo "<input type='text' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/></td></tr>";?>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>?action=add&ProductSKU=<?php echo $row2["ProductSKU"]; ?>">
+                                            <?php echo "<input type='text' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/></td></tr>";?>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>?action=add&ProductSKU=<?php echo $row3["ProductSKU"]; ?>">
+                                            <?php echo "<input type='text' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/></td></tr>";?>
+                                        </form>
+                                    </td>
+                                </tr> -->
                             </table>
                             <br><br>
                             <button onclick="window.location.href='products.php?productfilter=Trending'">Explore More</button>

@@ -1,10 +1,14 @@
+<?php   
+session_start();
+include "dbconnect.php";
+?>
 <!DOCTYPE html>
 <!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
 <html lang="en">
     <head>
         <title>Memeology</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
     </head>
     <body>
         <div id="wrapper">
@@ -28,19 +32,50 @@
                     </div>
                 </nav>
             </header>
-            <div>
-                
-            </div>
-            <div>
-                <div class="content">
-                    <div class="login-form">
-                            <div class="login-form-box">
-                                <p>Invalid User! Please check your <strong>Username</strong> or <strong>Password and try <a href="login-main.php">logging in again!</a></strong></p>
-                                <p>New User?<br><a href="register.html">Register if you don't have an account</a></p>
-                            </div>
-                    </div>
-                </div>
-                
+            <div class="content">
+                <p>
+                <?php
+                $checkoutOK = TRUE;
+                foreach ($_SESSION["cart_item"] as $item=>$value){
+                    $productSKU = $item;
+                    $quantity = $value["Quantity"];
+                    $sql = "SELECT *
+                    FROM products
+                    WHERE ProductSKU='$productSKU'";
+                    $result = $dbcnx->query($sql);
+                    if (!$result){
+                        echo "query_failed";
+                    }
+                    else{
+                        $row = $result->fetch_assoc();
+                        if ($quantity<$row['Quantity']) {
+                            $newQtyInStock = $row['Quantity'] - $quantity;
+                            $sql_update = "UPDATE products
+                            SET Quantity=$newQtyInStock
+                            WHERE ProductSKU='$productSKU'";
+                            $result_update = $dbcnx->query($sql_update);
+                            if (!$result_update) {
+                                echo "An error has occurred. Could not checkout.";
+                            }
+                            unset($_SESSION["cart_item"]);
+                        }
+                        else {
+                            echo "<br>Only " .$row['Quantity']. " left in stock for <strong>" .$row['ProductName']. "</strong> but you ordered " .$quantity. ".";
+                            echo "<br><br>Please <a href='my-cart.php'>go back to cart</a> and review your items.";
+                            $checkoutOK = FALSE;
+                        };
+                    };;
+                }
+                ?>
+                </p>
+                <h2>
+                    <?php
+                    if ($checkoutOK==TRUE) {
+                        echo "Checkout Done!";
+                        echo "<br><br><a href='index.php'>Continue Shopping</a>";
+                    }
+                    ?>
+                </h2>
             </div>
             <footer>
                 <hr>
@@ -57,7 +92,7 @@
                         <p><a href="products.php?productfilter=Trending">Trending</a></p>
                         <p><a href="products.php?productfilter=Sale">SALE</a></p>
                         <p><a href="products.php?productfilter=All">Products</a></p>
-                        <p><a href="join-us.html">Join Us</a></p>
+                        <p><a href="memeology-it.php">MemeologyIt</a></p>
                     </div>
                     <div class="column-5">
                         <h3>Account</h3>

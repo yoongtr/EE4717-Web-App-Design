@@ -273,6 +273,9 @@ button {
 .my-cart {
     padding: 50px;
 }
+.mycart-right {
+    text-align: right;
+}
 
 /* JOIN US PAGE */
 .join-us-header{

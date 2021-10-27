@@ -3,14 +3,55 @@ session_start();
 if(!isset($_SESSION["sess_user"])){  
     header("location:login-main.php");  
 } else{
-    if (!isset($_SESSION['cart'])){
-        $_SESSION['cart'] = array();
-    };
-    if (isset($_GET['empty'])) {
-        unset($_SESSION['cart']);
-        header('location: ' . $_SERVER['PHP_SELF']);
+    include "dbconnect.php";
+    if (isset($_GET['productfilter'])) {
+        $_SESSION['productfilter'] = $_GET['productfilter'];
+        };
+    if (!isset($_SESSION['cart_item'])){
+        $_SESSION['cart_item'] = array();
+        };
+    if(isset($_GET["action"])) {
+        switch($_GET["action"]) {
+            case "add":
+                if(!empty($_POST["Quantity"])) {
+                    $productBySKU = $dbcnx->query("SELECT * FROM products WHERE ProductSKU='" . $_GET["ProductSKU"] . "'");
+                    $productBySKU_row = $productBySKU->fetch_assoc();
+                    $itemArray = array($productBySKU_row["ProductSKU"]=>array('ProductName'=>$productBySKU_row["ProductName"], 'ProductSKU'=>$productBySKU_row["ProductSKU"], 'Quantity'=>$_POST["Quantity"]));
+                    if(!empty($_SESSION["cart_item"])) {
+                        if(in_array($productBySKU_row["ProductSKU"],array_keys($_SESSION["cart_item"]))) {
+                            foreach($_SESSION["cart_item"] as $k => $v) {
+                                    if($productBySKU_row["ProductSKU"] == $k) {
+                                        if(empty($_SESSION["cart_item"][$k]["Quantity"])) {
+                                            $_SESSION["cart_item"][$k]["Quantity"] = 0;
+                                        }
+                                        $_SESSION["cart_item"][$k]["Quantity"] += $_POST["Quantity"];
+                                    }
+                            }
+                        } else {
+                            $_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray);
+                        }
+                    } else {
+                        $_SESSION["cart_item"] = $itemArray;
+                    }
+                }
+            break;
+            case "remove":
+                if(!empty($_SESSION["cart_item"])) {
+                    foreach($_SESSION["cart_item"] as $k => $v) {
+                            if($_GET["ProductSKU"] == $k)
+                                unset($_SESSION["cart_item"][$k]);				
+                            if(empty($_SESSION["cart_item"]))
+                                unset($_SESSION["cart_item"]);
+                    }
+                }
+            break;
+            case "empty":
+                unset($_SESSION["cart_item"]);
+            break;	
+        }
+        header('location: ' . $_SERVER['PHP_SELF']. '?' . SID);
         exit();
-    };
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +64,7 @@ if(!isset($_SESSION["sess_user"])){
         <div id="wrapper">
             <header>
                 <nav>
-                <a href="index.php" id="header-logo">Memeology</a>
+                    <a href="index.php" id="header-logo">Memeology</a>
                     <a href="products.php?productfilter=Trending">Trending</a>
                     <a href="products.php?productfilter=Sale">SALE</a>
                     <a href="products.php?productfilter=All">Products</a>
@@ -45,23 +86,26 @@ if(!isset($_SESSION["sess_user"])){
                 <div class="content">
                     <h2>Viewing
                     <?=$_SESSION['sess_user'];?>'s Cart</h2>
-                    <h4><a href="logout.php">Logout</a></h4>
+                    <h2><small><a href="logout.php">Logout</a><small></h2>
                     <div class="my-cart">
                         <table class="product-table">
                             <thead>
                                 <tr>
                                     <th>Image</th>
                                     <th>Item</th>
-                                    <th>Price</th>
+                                    <th>Item Price</th>
+                                    <th>Quantity</th>
+                                    <th>Subtotal</th>
+                                    <th>Remove</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                include "dbconnect.php";
                                 $total = 0;
-                                for ($i=0; $i < count($_SESSION['cart']); $i++){
-                                    $productSKU = $_SESSION['cart'][$i];
-                                    $sql = "SELECT ProductSKU, ProductName, ProductImage, ProductDescription, Price
+                                foreach ($_SESSION["cart_item"] as $item=>$value){
+                                    $productSKU = $item;
+                                    $quantity = $value["Quantity"];
+                                    $sql = "SELECT *
                                     FROM products
                                     WHERE ProductSKU='$productSKU'";
                                     $result = $dbcnx->query($sql);
@@ -70,11 +114,16 @@ if(!isset($_SESSION["sess_user"])){
                                     }
                                     else{
                                         $row = $result->fetch_assoc();
+                                        $subtotal = $quantity*$row['Price'];
                                         echo "<tr>";
                                         echo "<td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:10vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td>";
                                         echo "<td>" .$row['ProductName']. "</td>";
-                                        echo "<td align='right'>$";
+                                        echo "<td>$";
                                         echo $row['Price']. "</td>";
+                                        echo "<td>" .$quantity. "</td>";
+                                        echo "<td>$";
+                                        echo number_format($subtotal, 2). "</td>";
+                                        echo "<td><a href='" .$_SERVER['PHP_SELF']. '?action=remove&ProductSKU=' .$row['ProductSKU']. "'>Remove</a></td>";
                                         echo "</tr>";
                                         $total = $total + $row['Price'];
                                     };
@@ -84,14 +133,22 @@ if(!isset($_SESSION["sess_user"])){
                             <tfoot>
                                 <tr>
                                     <th align='right'></th><br>
+                                    <th align='right'></th><br>
+                                    <th align='right'></th><br>
                                     <th align='right'>Total:</th><br>
-                                    <th align='right'>$<?php echo number_format($total, 2) ?>
-                                    </th>
+                                    <th align='right'>$<?php echo number_format($total, 2) ?></th><br>
+                                    <th align='right'></th><br>
                                 </tr>
                             </tfoot>
                         </table>
-                        <p><a href="products.php">Continue Shopping</a> or
-                        <a href="<?php echo $_SERVER['PHP_SELF']; ?>?empty=1">Empty your cart</a></p>
+                        <div class="mycart-right">
+                            <br>
+                            <form action="checkout.php" method="post">
+                                <input type="submit" name="checkout" id="checkout" value="Checkout">
+                            </form>
+                            <p><a href="products.php">Continue Shopping</a> or
+                            <a href="<?php echo $_SERVER['PHP_SELF']; ?>?empty=1">Empty your cart</a></p>
+                        </div>
                     </div>
                     
                 </div>

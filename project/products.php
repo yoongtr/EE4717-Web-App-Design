@@ -1,16 +1,54 @@
 <?php   
 session_start();
+include "dbconnect.php";
 if (isset($_GET['productfilter'])) {
     $_SESSION['productfilter'] = $_GET['productfilter'];
     };
-if (!isset($_SESSION['cart'])){
-    $_SESSION['cart'] = array();
+if (!isset($_SESSION['cart_item'])){
+    $_SESSION['cart_item'] = array();
     };
-if (isset($_GET['buy'])) {
-    $_SESSION['cart'][] = $_GET['buy'];
+if(isset($_GET["action"])) {
+    switch($_GET["action"]) {
+        case "add":
+            if(!empty($_POST["Quantity"])) {
+                $productBySKU = $dbcnx->query("SELECT * FROM products WHERE ProductSKU='" . $_GET["ProductSKU"] . "'");
+                $productBySKU_row = $productBySKU->fetch_assoc();
+                $itemArray = array($productBySKU_row["ProductSKU"]=>array('ProductName'=>$productBySKU_row["ProductName"], 'ProductSKU'=>$productBySKU_row["ProductSKU"], 'Quantity'=>$_POST["Quantity"]));
+                if(!empty($_SESSION["cart_item"])) {
+                    if(in_array($productBySKU_row["ProductSKU"],array_keys($_SESSION["cart_item"]))) {
+                        foreach($_SESSION["cart_item"] as $k => $v) {
+                                if($productBySKU_row["ProductSKU"] == $k) {
+                                    if(empty($_SESSION["cart_item"][$k]["Quantity"])) {
+                                        $_SESSION["cart_item"][$k]["Quantity"] = 0;
+                                    }
+                                    $_SESSION["cart_item"][$k]["Quantity"] += $_POST["Quantity"];
+                                }
+                        }
+                    } else {
+                        $_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray);
+                    }
+                } else {
+                    $_SESSION["cart_item"] = $itemArray;
+                }
+            }
+        break;
+        case "remove":
+            if(!empty($_SESSION["cart_item"])) {
+                foreach($_SESSION["cart_item"] as $k => $v) {
+                        if($_GET["ProductSKU"] == $k)
+                            unset($_SESSION["cart_item"][$k]);				
+                        if(empty($_SESSION["cart_item"]))
+                            unset($_SESSION["cart_item"]);
+                }
+            }
+        break;
+        case "empty":
+            unset($_SESSION["cart_item"]);
+        break;	
+    }
     header('location: ' . $_SERVER['PHP_SELF']. '?' . SID);
     exit();
-    };
+}
 ?>
 <!DOCTYPE html>
 <!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
@@ -64,7 +102,6 @@ if (isset($_GET['buy'])) {
                 <div class="product-rightcol">
                     <div class="content">
                     <?php
-                            include "dbconnect.php";
                             if ($_SESSION['productfilter']=="All") {
                                 $sql = "SELECT ProductSKU, ProductName, ProductImage, ProductDescription, Price
                                 FROM products";
@@ -114,11 +151,11 @@ if (isset($_GET['buy'])) {
                             $result = $dbcnx->query($sql);
                             // echo $result;
                             if (!$result){
-                                echo "query_failed";
+                                echo "<h2>Unable to find product(s).</h2>";
                             }
                             else{
                                 $row = $result->fetch_assoc();
-                            };
+                            // };
                         ?>
                         <h2>Showing result(s) for
                         <?php
@@ -155,24 +192,29 @@ if (isset($_GET['buy'])) {
                         ?>
                         </h2>
                         <p>Your shopping cart contains 
-                            <?php echo count($_SESSION['cart']); ?> 
-                            items.</p>
+                            <?php echo count($_SESSION['cart_item']); ?> 
+                            item(s).</p>
                         <p><a href="my-cart.php">View My Cart</a></p>
-                        <table class="product-table">
-                        <tr>
-                            <th>Product</th>
-                            <th>Image</th>
-                            <th>Description</th>
-                            <th>Price (SGD)</th>
-                            <th>Add To Cart</th>
-                        </tr>
+                            <table class="product-table">
+                            <tr>
+                                <th>Product</th>
+                                <th>Image</th>
+                                <th>Description</th>
+                                <th>Price (SGD)</th>
+                                <th>Add To Cart</th>
+                            </tr>
+                            <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>?action=add&ProductSKU=<?php echo $row["ProductSKU"]; ?>">
+                                <?php echo "<tr><td>" . $row['ProductName'] . "</td><td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:15vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td><td><input type='text' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/></td></tr>";?>
+                            </form>
+                                <?php while($row = $result->fetch_assoc()){   //Creates a loop to loop through results?>
+                                <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>?action=add&ProductSKU=<?php echo $row["ProductSKU"]; ?>">
+                                <?php echo "<tr><td>" . $row['ProductName'] . "</td><td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:15vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td><td><input type='text' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/></td></tr>";?>
+                                </form>
+                            <?php }?>
+                            </table>
                         <?php
-                            echo "<tr><td>" . $row['ProductName'] . "</td><td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:15vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td><td><a href='" .$_SERVER['PHP_SELF']. '?buy=' .$row['ProductSKU']. "'><img src='img/cart-icon-28356.png' width='30' height='30'></a></td></tr>";
-                            while($row = $result->fetch_assoc()){   //Creates a loop to loop through results
-                                echo "<tr><td>" . $row['ProductName'] . "</td><td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:15vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td><td><a href='" .$_SERVER['PHP_SELF']. '?buy=' .$row['ProductSKU']. "'><img src='img/cart-icon-28356.png' width='30' height='30'></a></td></tr>";
-                                }
+                        };
                         ?>
-                        </table>
                     </div>
                 </div>
             </div>
