@@ -1,8 +1,15 @@
 <?php   
 session_start();
+// echo var_dump($_POST);
 include "dbconnect.php";
 if (isset($_GET['productfilter'])) {
     $_SESSION['productfilter'] = $_GET['productfilter'];
+    };
+if (isset($_POST['SearchBar'])) {
+    $_SESSION['currentsearch'] = $_POST['SearchBar'];
+    };
+if ((isset($_POST['SearchBar'])==FALSE and (isset($_SESSION['currentsearch'])==TRUE))) {
+    $_POST['SearchBar'] = $_SESSION['currentsearch'];
     };
 if (!isset($_SESSION['cart_item'])){
     $_SESSION['cart_item'] = array();
@@ -101,95 +108,28 @@ if(isset($_GET["action"])) {
                 <div class="product-rightcol">
                     <div class="content">
                     <?php
-                            if ($_SESSION['productfilter']=="All") {
-                                $sql = "SELECT *
-                                FROM products";
-                            }
-                            elseif ($_SESSION['productfilter']=="T-Shirt") {
-                                $sql = "SELECT *
-                                FROM products
-                                WHERE ProductCategory= 'T-Shirt' ";
-                            }
-                            elseif ($_SESSION['productfilter']=="Mug") {
-                                $sql = "SELECT *
-                                FROM products
-                                WHERE ProductCategory= 'Mug' ";
-                            }
-                            elseif ($_SESSION['productfilter']=="Cover") {
-                                $sql = "SELECT *
-                                FROM products
-                                WHERE ProductCategory= 'Cover' ";
-                            }
-                            elseif ($_SESSION['productfilter']=="Other") {
-                                $sql = "SELECT *
-                                FROM products
-                                WHERE ProductCategory= 'Other' ";
-                            }
-                            elseif ($_SESSION['productfilter']=="Trending") {
-                                $sql = "SELECT *
-                                FROM products
-                                WHERE Trending=TRUE ";
-                            }
-                            elseif ($_SESSION['productfilter']=="Sale") {
-                                $sql = "SELECT *
-                                FROM products
-                                WHERE Sale=TRUE";
-                            }
-                            elseif ($_SESSION['productfilter']=="SpecialCollection") {
-                                $sql = "SELECT *
-                                FROM products
-                                WHERE SpecialCollection=TRUE";
-                            }
-                            else {
-                                $productSKU = $_SESSION['productfilter'];
-                                $sql = "SELECT *
-                                FROM products
-                                WHERE ProductSKU LIKE '%$productSKU%'";
-                            };
-
-                            $result = $dbcnx->query($sql);
-                            // echo $result;
-                            if (!$result){
-                                echo "<h2>Unable to find product(s).</h2>";
+                        $searchtext = $_POST['SearchBar'];
+                        $sql = "SELECT *
+                        FROM products
+                        WHERE ProductName LIKE '%$searchtext%'";
+                        $result = $dbcnx->query($sql);
+                        if (!$result){
+                            echo "<h2>Database error.</h2>";
+                        }
+                        else {
+                            $row = $result->fetch_assoc();
+                            if (count($row)==0){
+                                echo "<h2>No products found for '" .$searchtext. "' :(</h2>";
+                                echo "<br><br><br><br>";
+                                echo "<h2><a href='index.php'>Back to Home Page</a></h2>";
                             }
                             else{
-                                $row = $result->fetch_assoc();
-                            // };
-                        ?>
-                        <h2>Showing result(s) for
-                        <?php
-                            if ($_SESSION['productfilter']=="All") {
-                                echo $_SESSION['productfilter'];
-                                echo ' Products';
-                            }
-                            elseif ($_SESSION['productfilter']=="T-Shirt") {
-                                echo $_SESSION['productfilter'];
-                            }
-                            elseif ($_SESSION['productfilter']=="Mug") {
-                                echo $_SESSION['productfilter'];
-                            }
-                            elseif ($_SESSION['productfilter']=="Cover") {
-                                echo $_SESSION['productfilter'];
-                            }
-                            elseif ($_SESSION['productfilter']=="Other") {
-                                echo $_SESSION['productfilter'];
-                            }
-                            elseif ($_SESSION['productfilter']=="Trending") {
-                                echo $_SESSION['productfilter'];
-                                echo ' Products';
-                            }
-                            elseif ($_SESSION['productfilter']=="Sale") {
-                                echo $_SESSION['productfilter'];
-                                echo ' Products';
-                            }
-                            elseif ($_SESSION['productfilter']=="SpecialCollection") {
-                                echo ' Memeology x Louvre Fashion Collection';
-                            }
-                            else {
-                                echo $row['ProductName'];
-                            };
-                        ?>
-                        </h2>
+                    ?>
+                    <h2>Showing result(s) for '
+                    <?php
+                        echo $_SESSION['currentsearch'];
+                    ?>
+                        '</h2>
                         <p>Your shopping cart contains 
                             <?php echo count($_SESSION['cart_item']); ?> 
                             item(s).</p>
@@ -212,9 +152,9 @@ if(isset($_GET["action"])) {
                                 </form>
                             <?php }?>
                             </table>
-                        <?php
-                        };
-                        ?>
+                        <?php 
+                            };
+                        }; ?>
                     </div>
                 </div>
             </div>

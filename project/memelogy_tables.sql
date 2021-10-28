@@ -26,10 +26,10 @@ CREATE TABLE products (
  
 CREATE TABLE orders (
     OrderID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    OrderDate DATE,
     ProductSKU VARCHAR(20) NOT NULL, 
     UserID INT UNSIGNED NOT NULL, 
     OrderQuantity INT UNSIGNED NOT NULL,
-    DeliveryAddress VARCHAR(200) NOT NULL,
     FOREIGN KEY (ProductSKU) REFERENCES products(ProductSKU),
     FOREIGN KEY (UserID) REFERENCES users(UserID)
 );

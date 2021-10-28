@@ -16,13 +16,12 @@
                     <a href="products.php?productfilter=All">Products</a>
                     <a href="memeology-it.php">Submit Your Design!</a>
                     <div class="search-container">
-                        <form>
-                          <input type="text" placeholder="Search..." name="search">
-                          <button type="submit"><img src="./img/search_button.png" alt="search button" width="15" height="15"></button>
+                        <form method="post" action="searchresults.php">
+                            <input type="text" placeholder="Search..." name="SearchBar">
+                            <button type="submit"><img src="./img/search_button.png" alt="search button" width="15" height="15"></button>
                         </form>
                     </div>
                     <div class="account-info">
-                        <a href="index.php"><img src="img/wishlist.png" width="30" height="30"></a>
                         <a href="my-cart.php"><img src="img/cart-icon-28356.png" width="30" height="30"></a> 
                         <a href="login-main.php"><img src="img/user-icon.png" width="30" height="30"></a>
                     </div>

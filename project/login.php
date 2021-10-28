@@ -18,11 +18,13 @@ if ($result!=0){
     while ($row = $result->fetch_assoc()){
         $dbusername=$row['Username'];  
         $dbpassword=$row['UserPassword'];
+        $dbuserID=$row['UserID'];
     }
     if($username == $dbusername && $password == $dbpassword)  
         {  
         session_start();  
-        $_SESSION['sess_user']=$username;  
+        $_SESSION['sess_user']=$username;
+        $_SESSION['sess_user_id']=$dbuserID;
     
         /* Redirect browser */  
         header("Location: my-account.php");  

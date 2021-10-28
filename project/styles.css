@@ -398,7 +398,6 @@ button {
 }
 
 .my-account .my-account-details{
-    border: 1px solid black;
     min-height: 200px;
     min-width: 80%;
 }
@@ -444,6 +443,9 @@ button {
     background-color: #E89F71;
     color: white;
 }
+input[type='number']{
+    width: 25px;
+} 
 
 /* Memeology Page */
 

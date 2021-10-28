@@ -1,5 +1,5 @@
 <?php   
-session_start();  
+session_start();
 if(!isset($_SESSION["sess_user"])){  
     header("location:login-main.php");  
 } else{
@@ -70,13 +70,12 @@ if(!isset($_SESSION["sess_user"])){
                     <a href="products.php?productfilter=All">Products</a>
                     <a href="memeology-it.php">Submit Your Design!</a>
                     <div class="search-container">
-                        <form>
-                          <input type="text" placeholder="Search..." name="search">
+                        <form method="post" action="searchresults.php">
+                          <input type="text" placeholder="Search..." name="SearchBar">
                           <button type="submit"><img src="./img/search_button.png" alt="search button" width="15" height="15"></button>
                         </form>
                     </div>
                     <div class="account-info">
-                        <a href="index.php"><img src="img/wishlist.png" width="30" height="30"></a>
                         <a href="my-cart.php"><img src="img/cart-icon-28356.png" width="30" height="30"></a>
                         <a href="login-main.php"><img src="img/user-icon.png" width="30" height="30"></a>
                     </div>
@@ -88,6 +87,12 @@ if(!isset($_SESSION["sess_user"])){
                     <?=$_SESSION['sess_user'];?>'s Cart</h2>
                     <h2><small><a href="logout.php">Logout</a><small></h2>
                     <div class="my-cart">
+                        <?php
+                        if (count($_SESSION["cart_item"])==0) {
+                            echo "<h2> Your cart is empty. <a href='products.php'>Shop something!</a></h2>";
+                        }
+                        else {
+                        ?>
                         <table class="product-table">
                             <thead>
                                 <tr>
@@ -147,8 +152,9 @@ if(!isset($_SESSION["sess_user"])){
                                 <input type="submit" name="checkout" id="checkout" value="Checkout">
                             </form>
                             <p><a href="products.php">Continue Shopping</a> or
-                            <a href="<?php echo $_SERVER['PHP_SELF']; ?>?empty=1">Empty your cart</a></p>
+                            <a href="<?php echo $_SERVER['PHP_SELF']; ?>?action=empty">Empty your cart</a></p>
                         </div>
+                        <?php };?>
                     </div>
                     
                 </div>

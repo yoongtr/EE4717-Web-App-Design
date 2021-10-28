@@ -49,6 +49,7 @@ if(isset($_GET["action"])) {
     header('location: ' . $_SERVER['PHP_SELF']. '?' . SID);
     exit();
 }
+// echo var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,13 +68,12 @@ if(isset($_GET["action"])) {
                     <a href="products.php?productfilter=All">Products</a>
                     <a href="memeology-it.php">Submit Your Design!</a>
                     <div class="search-container">
-                        <form>
-                          <input type="text" placeholder="Search..." name="search">
+                        <form method="post" action="searchresults.php">
+                          <input type="text" placeholder="Search..." name="SearchBar">
                           <button type="submit"><img src="./img/search_button.png" alt="search button" width="15" height="15"></button>
                         </form>
                     </div>
                     <div class="account-info">
-                        <a href="index.php"><img src="img/wishlist.png" width="30" height="30"></a>
                         <a href="my-cart.php"><img src="img/cart-icon-28356.png" width="30" height="30"></a> 
                         <a href="login-main.php"><img src="img/user-icon.png" width="30" height="30"></a>
                     </div>
@@ -309,28 +309,28 @@ if(isset($_GET["action"])) {
                                         </p>
                                     </td>
                                 </tr>
-                                <!-- <tr class="row-2">
+                                <tr class="row-2">
                                     <td>
                                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>?action=add&ProductSKU=<?php echo $row0["ProductSKU"]; ?>">
-                                            <?php echo "<input type='text' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/></td></tr>";?>
+                                            <?php echo "<input type='number' min='1' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/>";?>
                                         </form>
                                     </td>
                                     <td>
                                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>?action=add&ProductSKU=<?php echo $row1["ProductSKU"]; ?>">
-                                            <?php echo "<input type='text' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/></td></tr>";?>
+                                            <?php echo "<input type='number' min='1' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/>";?>
                                         </form>
                                     </td>
                                     <td>
                                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>?action=add&ProductSKU=<?php echo $row2["ProductSKU"]; ?>">
-                                            <?php echo "<input type='text' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/></td></tr>";?>
+                                            <?php echo "<input type='number' min='1' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/>";?>
                                         </form>
                                     </td>
                                     <td>
                                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>?action=add&ProductSKU=<?php echo $row3["ProductSKU"]; ?>">
-                                            <?php echo "<input type='text' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/></td></tr>";?>
+                                            <?php echo "<input type='number' min='1' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/>";?>
                                         </form>
                                     </td>
-                                </tr> -->
+                                </tr>
                             </table>
                             <br><br>
                             <button onclick="window.location.href='products.php?productfilter=Trending'">Explore More</button>

@@ -24,6 +24,10 @@ else
 	echo "Welcome ". $username . ". You are now registered";
 	session_start();  
     $_SESSION['sess_user']=$username;
+	$user_query ="SELECT * FROM users WHERE Username='".$username."' AND UserPassword='".$password."'";
+	$user_result = $dbcnx->query($user_query);
+	$row_user = $user_result->fetch_assoc();
+	$_SESSION['sess_user_id']=$row_user['UserID'];
 	header("location:index.php");  
 	
 ?>
