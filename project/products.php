@@ -54,7 +54,7 @@ if(isset($_GET["action"])) {
 <!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
 <html lang="en">
     <head>
-        <title>Memeology</title>
+        <title>Products | Memeology</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
     </head>
