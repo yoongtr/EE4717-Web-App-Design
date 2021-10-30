@@ -5,6 +5,16 @@ body {
     box-sizing: border-box;
 }
 
+a{
+    text-decoration: none;
+    /* color: inherit; */
+}
+
+
+a:hover, button:hover{
+    cursor: pointer;
+}
+
 #wrapper {
     background-color: #FCF8F3; 
     width: 100%; /*Changed it to 100% width*/
@@ -475,10 +485,6 @@ input[type='number']{
     margin: auto;
 }
 
-.memeology-selections, .memeology-price{
-    border: 1px solid black;
-}
-
 .memeology-selections{
     width: 55%;
     padding: 20px;
@@ -497,6 +503,10 @@ input[type='number']{
 
 .memeology-price{
     width: 40%;
+}
+
+.memeology-price table tr td{
+    padding: 5px 0;
 }
 
 textarea{
