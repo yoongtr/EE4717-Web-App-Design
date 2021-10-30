@@ -1,16 +1,28 @@
-<?php   
-session_start();  
-if(isset($_SESSION["sess_user"])){  
-    header("location:my-account.php");  
-} else{
+<?php
+include "dbconnect.php";
+if (isset($_POST['submit'])) {
+	if (empty($_POST['subEmail'])) {
+	echo "You need to fill in your email!";
+	exit;}
+	}
+$subEmail = $_POST['subEmail'];
+	
+$sql = "INSERT INTO subscribe (subEmail) 
+		VALUES ('$subEmail')";
+
+$result = $dbcnx->query($sql);
+
+if (!$result){ 
+	echo "Your query failed.";
+}
+else{
 ?>
 <!DOCTYPE html>
-<!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
 <html lang="en">
-    <head>
-        <title>Login | Memeology</title>
+<head>
+        <title>Subscribe | Memeology</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
     </head>
     <body>
         <div id="wrapper">
@@ -23,8 +35,8 @@ if(isset($_SESSION["sess_user"])){
                     <a href="memeology-it.php">Submit Your Design!</a>
                     <div class="search-container">
                         <form method="post" action="searchresults.php">
-                          <input type="text" placeholder="Search..." name="SearchBar">
-                          <button type="submit"><img src="./img/search_button.png" alt="search button" width="15" height="15"></button>
+                            <input type="text" placeholder="Search..." name="SearchBar">
+                            <button type="submit"><img src="./img/search_button.png" alt="search button" width="15" height="15"></button>
                         </form>
                     </div>
                     <div class="account-info">
@@ -38,23 +50,14 @@ if(isset($_SESSION["sess_user"])){
             </div>
             <div>
                 <div class="content">
-                    <div class="login-form">
-                        <form action="login.php" method="post">
+                <div class="login-form">
                             <div class="login-form-box">
-                                <div class="login-form-input">
-                                  <label for="Username">Username:</label>
-                                  <input type="text" id="username" name="username" required>
-                                </div>
-                                <div class="login-form-input">
-                                  <label for="Password">Password:</label>
-                                  <input type="password" id="password" name="password" required>
-                                </div>
-                                <div class="login-form-submit">
-                                    <input type="submit" name="login" id="login" value="Login">
-                                </div> <br> 
-                                <div><a href="register.html">Register if you don't have an account</a></div> 
+                                <p>Congratulations <strong>
+                                <?=$subEmail;?>
+                                </strong>. You have successfully subscribed to Memeology! <br><br>
+                                <a href="index.php">Head back Home</a></strong></p>
+                                <p>New User?<br><a href="register.html">Register if you don't have an account</a></p>
                             </div>
-                        </form>
                     </div>
                 </div>
                 
@@ -74,7 +77,7 @@ if(isset($_SESSION["sess_user"])){
                         <p><a href="products.php?productfilter=Trending">Trending</a></p>
                         <p><a href="products.php?productfilter=Sale">SALE</a></p>
                         <p><a href="products.php?productfilter=All">Products</a></p>
-                        <p><a href="join-us.html">Join Us</a></p>
+                        <p><a href="memeology-it.php">MemeologyIt</a></p>
                     </div>
                     <div class="column-5">
                         <h3>Account</h3>
@@ -89,13 +92,13 @@ if(isset($_SESSION["sess_user"])){
                         <p><a href="index.php">Instagram</a></p>
                         <p><a href="index.php">Twitter</a></p>
                     </div>
-                    <div class="column-5">
+                    <!-- <div class="column-5">
                         <h3>Stay Connected</h3>
-                        <form action="subscribe.php" method="POST">
-                            <input type="text" placeholder="Enter your email" name="subEmail" id="subEmail">
-                            <button type="submit" name="submit" id="submit">Submit</button>
+                        <form>
+                            <input type="text" placeholder="Enter your email" name="email">
+                            <button type="submit">Submit</button>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
             </footer>
         </div>

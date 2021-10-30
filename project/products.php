@@ -250,9 +250,9 @@ if(isset($_GET["action"])) {
                     </div>
                     <div class="column-5">
                         <h3>Stay Connected</h3>
-                        <form>
-                            <input type="text" placeholder="Enter your email" name="email">
-                            <button type="submit">Submit</button>
+                        <form action="subscribe.php" method="POST">
+                            <input type="text" placeholder="Enter your email" name="subEmail" id="subEmail">
+                            <button type="submit" name="submit" id="submit">Submit</button>
                         </form>
                     </div>
                 </div>
