@@ -77,19 +77,28 @@ include "dbconnect.php";
                 <h2>
                     <?php
                     if ($checkoutOK==TRUE) {
-                        unset($_SESSION["cart_item"]);
                         echo "Checkout Done!";
                         echo "<br><br><a href='index.php'>Continue Shopping</a><br>";
-
+                        
+                        $cartTotal = array();
+                        foreach ($_SESSION["cart_item"] as $k=>$v){
+                            array_push($cartTotal, $k);
+                        };
+                        // print_r($cartTotal);
+                        // echo $cartTotal;
+                        $comma_separated = implode(" , ", $cartTotal);
                         $to = 'f32ee@localhost';
                         $subject = 'Your Memeology Order has been confirmed!';
-                        $message = 'Hello '.$_SESSION["sess_user"]. '. Here are your order details: ' .$item. '.' ;
+                        $message = 'Hello '.$_SESSION["sess_user"]. '. Here are your order details: ';
+                        $message = $message . $comma_separated;
+                        // echo $message;
                         $headers = 'From: f32ee@localhost' . "\r\n" .
                         'Reply-To: f32ee@localhost' . "\r\n" .
                         'X-Mailer: PHP/' . phpversion();
 
                         mail($to, $subject, $message, $headers,'-ff32ee@localhost');
                         echo ("Order Success email sent to : ".$to);
+                        unset($_SESSION["cart_item"]);
                     }
                     ?>
                 </h2>
