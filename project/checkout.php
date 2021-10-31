@@ -119,6 +119,7 @@ include "dbconnect.php";
                         <form action="subscribe.php" method="POST">
                             <input type="text" placeholder="Enter your email" name="subEmail" id="subEmail">
                             <button type="submit" name="submit" id="submit">Submit</button>
+                            <script type="text/javascript" src="subscribe.js"></script>
                         </form>
                     </div>
                 </div>
