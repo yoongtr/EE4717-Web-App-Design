@@ -44,7 +44,7 @@ if(!isset($_SESSION["sess_user"])){
                         <img src="./img/memeologyit.png">
                     </div>
                     <div class="memeology-form">
-                        <form action="memeology-submit.php" method="POST">
+                        <form action="memeology-submit.php" method="POST" name="memeologyForm" onsubmit="return formCheck()">
                             <div class="memeology-form-details">
                                 <div class="memeology-selections">
                                     <div class="memeology-item options">
@@ -68,7 +68,7 @@ if(!isset($_SESSION["sess_user"])){
                                     </div>
                                 </div>
                                 <div class="memeology-price">
-                                    <p>Options Selected</p>
+                                    <p><strong>Options Selected</strong></p>
                                     <table>
                                         <tr><td>Choice Price:</td><td id="itemPrice">0</td></tr>
                                         <tr><td>Colour Price:</td><td id="colourChoice">0</td></tr>
@@ -77,10 +77,10 @@ if(!isset($_SESSION["sess_user"])){
                                 </div>
                             </div>
                             <div class="memeology-address">
-                                <textarea id="myAddress" name="myAddress" required placeholder="Please Input Address"></textarea>
+                                <textarea id="myAddress" name="myAddress" placeholder="Please Input Address"></textarea>
                             </div>
                             <div class="memeology-comments">
-                                <textarea id="myComments" name="myComments" required placeholder="Any Additional Comments"></textarea>
+                                <textarea id="myComments" name="myComments" placeholder="Any Additional Comments"></textarea>
                             </div>
                             <div class="submitbutton">
                                <input type="submit" id="submit" name="submit" value="Submit Application">
@@ -132,10 +132,32 @@ if(!isset($_SESSION["sess_user"])){
             </footer>
         </div>
         <script>
+            function formCheck(){
+                var address = document.forms["memeologyForm"]["myAddress"].value;
+                var myItem = document.forms["memeologyForm"]["myItem"].value;
+                var myColour = document.forms["memeologyForm"]["myColour"].value;
+                var myMeme = document.forms["memeologyForm"]["myMeme"].value;
+                if (myItem == "") {
+                    alert("Please pick an Item!"); 
+                    return false;
+                }
+                else if (myColour == ""){
+                    alert("Please pick a Colour!")
+                    return false;
+                }
+                else if (myMeme == ""){
+                    alert("Please upload a Meme!")
+                    return false;
+                }
+                else if (address == ""){
+                    alert("Please input your Address!")
+                    return false;
+                }
+            }
              var pricing = "0"
              var colouring = "0";
              total = 0;
-            function checkPrice(){
+             function checkPrice(){
                 var itemSelec = document.querySelector('select[id="myItem"]');
                 itemSelec = itemSelec.value;
                 if (itemSelec == "T-Shirt"){
@@ -148,14 +170,13 @@ if(!isset($_SESSION["sess_user"])){
                     pricing = "10.00";
                 }              
                 document.getElementById("itemPrice").innerHTML = "$ " + pricing;
-                total = parseFloat(pricing)+ parseFloat(colouring)     ;
+                total = parseFloat(pricing) + parseFloat(colouring);
                 total = String(total);
                 document.getElementById("totalPrice").innerHTML = "$ " + total;
             }
             function checkColour(){
                 var colourSelec = document.querySelector('select[id="myColour"]');
                 colourSelec = colourSelec.value;
-                
                 if (colourSelec == "Red" ){
                     colouring = "2.50";
                 }
@@ -172,8 +193,8 @@ if(!isset($_SESSION["sess_user"])){
             }
             var items = document.getElementById("myItem");
             var colours = document.getElementById("myColour");
-            items.addEventListener("change", checkPrice, false);
-            colours.addEventListener("change", checkColour, false);
+            items.addEventListener("change", checkPrice, true);
+            colours.addEventListener("change", checkColour, true);
         </script>
     </body>
 </html>
