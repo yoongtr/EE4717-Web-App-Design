@@ -13,8 +13,8 @@ $password = $_POST['password'];
 
 $password = md5($password);
 	
-$sql = "INSERT INTO users (FirstName, LastName, Username, Email, UserPassword) 
-		VALUES ('$firstName','$lastName','$username','$email','$password')";
+$sql = "INSERT INTO users (FirstName, LastName, Username, Email, UserPassword, isAdmin) 
+		VALUES ('$firstName','$lastName','$username','$email','$password', FALSE)";
 
 $result = $dbcnx->query($sql);
 

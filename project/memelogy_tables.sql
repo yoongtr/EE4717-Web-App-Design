@@ -8,7 +8,8 @@ CREATE TABLE users (
     LastName CHAR(40),
     Username VARCHAR(20) NOT NULL,
     Email VARCHAR(40) NOT NULL,
-    UserPassword VARCHAR(40) NOT NULL
+    UserPassword VARCHAR(40) NOT NULL,
+    isAdmin BOOLEAN NOT NULL
 );
 
 CREATE TABLE products (

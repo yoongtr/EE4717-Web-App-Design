@@ -44,13 +44,16 @@ if(!isset($_SESSION["sess_user"])){
                             <?php
                             include "dbconnect.php";
                             $userid = $_SESSION["sess_user_id"];
-                            $query = "SELECT FirstName, LastName, Email FROM users WHERE UserID = '$userid'";
+                            $query = "SELECT FirstName, LastName, Email, isAdmin FROM users WHERE UserID = '$userid'";
                             $result = $dbcnx->query($query);
                             if (!$result){
                                 echo "query_failed";
                             }
                             else{
                                 $row = $result->fetch_assoc();
+                                if ($row['isAdmin']==TRUE) {
+                                    echo "<h2>You are admin. View <a href='admin-page.php'>Admin Page.</a></h2>";
+                                };
                                 echo "<p><strong>First Name: </strong>" .$row["FirstName"]. "</p>";
                                 echo "<p><strong>Last Name: </strong>" .$row["LastName"]. "</p>";
                                 echo "<p><strong>Email: </strong>" .$row["Email"]. "</p>";

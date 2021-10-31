@@ -1,26 +1,17 @@
-<?php
+<?php   
+session_start();  
+if (isset($_GET['adminSKU'])) {
+    $_SESSION['adminSKU'] = $_GET['adminSKU'];
+    };
 include "dbconnect.php";
-if (isset($_POST['submit'])) {
-	if (empty($_POST['subEmail'])) {
-	echo "You need to fill in your email!";
-	exit;}
-	}
-$subEmail = $_POST['subEmail'];
-	
-$sql = "INSERT INTO subscribe (subEmail) 
-		VALUES ('$subEmail')";
-
-$result = $dbcnx->query($sql);
-
-if (!$result){ 
-	echo "Your query failed.";
-}
-else{
+// echo var_dump($_SESSION);
+// echo var_dump($_POST);
 ?>
 <!DOCTYPE html>
+<!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
 <html lang="en">
-<head>
-        <title>Subscribe | Memeology</title>
+    <head>
+        <title>Memeology It | Memeology</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
     </head>
@@ -35,8 +26,8 @@ else{
                     <a href="memeology-it.php">Submit Your Design!</a>
                     <div class="search-container">
                         <form method="post" action="searchresults.php">
-                            <input type="text" placeholder="Search..." name="SearchBar">
-                            <button type="submit"><img src="./img/search_button.png" alt="search button" width="15" height="15"></button>
+                          <input type="text" placeholder="Search..." name="SearchBar">
+                          <button type="submit"><img src="./img/search_button.png" alt="search button" width="15" height="15"></button>
                         </form>
                     </div>
                     <div class="account-info">
@@ -50,15 +41,26 @@ else{
             </div>
             <div>
                 <div class="content">
-                <div class="login-form">
-                            <div class="login-form-box">
-                                <p>Congratulations <strong>
-                                <?=$subEmail;?>
-                                </strong>. You have successfully subscribed to Memeology! <br><br>
-                                <a href="index.php">Head back Home</a></strong></p>
-                                <p>New User?<br><a href="register.html">Register if you don't have an account</a></p>
-                            </div>
-                    </div>
+                    <h2>Admin page to update product quantity</h2>
+                    <?php
+                    $quantity = $_POST["adminQty"];
+                    $productSKU = $_SESSION["adminSKU"];
+                    $sql = "UPDATE products
+                    SET Quantity = $quantity
+                    WHERE ProductSKU = '$productSKU'";
+                    $result = $dbcnx->query($sql);
+                    if (!$result){
+                        echo "<p>Cannot connect to database.</p>";
+                    }
+                    else{
+                    ?>
+                    <p>
+                    <?php
+                    echo $dbcnx->affected_rows." row(s) of product quantity changed.";
+                    ?>
+                    </p>
+                    <?php }; ?>
+                    <p><a href="admin-page.php">Back to Admin Page</a></p>
                 </div>
                 
             </div>
@@ -92,18 +94,16 @@ else{
                         <p><a href="index.php">Instagram</a></p>
                         <p><a href="index.php">Twitter</a></p>
                     </div>
-                    <!-- <div class="column-5">
+                    <div class="column-5">
                         <h3>Stay Connected</h3>
-                        <form>
-                            <input type="text" placeholder="Enter your email" name="email">
-                            <button type="submit">Submit</button>
+                        <form action="subscribe.php" method="POST">
+                            <input type="text" placeholder="Enter your email" name="subEmail" id="subEmail">
+                            <button type="submit" name="submit" id="submit">Submit</button>
+                            <script type="text/javascript" src="subscribe.js"></script>
                         </form>
-                    </div> -->
+                    </div>
                 </div>
             </footer>
         </div>
     </body>
 </html>
-<?php
-}
-?>

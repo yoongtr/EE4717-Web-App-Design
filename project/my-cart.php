@@ -112,7 +112,7 @@ if(!isset($_SESSION["sess_user"])){
                                     $quantity = $value["Quantity"];
                                     $sql = "SELECT *
                                     FROM products
-                                    WHERE ProductSKU='$productSKU'";
+                                    WHERE ProductSKU='.$productSKU.'";
                                     $result = $dbcnx->query($sql);
                                     if (!$result){
                                         echo "query_failed";
