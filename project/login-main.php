@@ -39,15 +39,15 @@ if(isset($_SESSION["sess_user"])){
             <div>
                 <div class="content">
                     <div class="login-form">
-                        <form action="login.php" method="post">
+                        <form action="login.php" method="post" name="loginForm" onsubmit="return formCheck()">
                             <div class="login-form-box">
                                 <div class="login-form-input">
                                   <label for="Username">Username:</label>
-                                  <input type="text" id="username" name="username" required>
+                                  <input type="text" id="username" name="username">
                                 </div>
                                 <div class="login-form-input">
                                   <label for="Password">Password:</label>
-                                  <input type="password" id="password" name="password" required>
+                                  <input type="password" id="password" name="password">
                                 </div>
                                 <div class="login-form-submit">
                                     <input type="submit" name="login" id="login" value="Login">
@@ -100,6 +100,20 @@ if(isset($_SESSION["sess_user"])){
                 </div>
             </footer>
         </div>
+        <script>
+            function formCheck(){
+                var username = document.forms["loginForm"]["username"].value;
+                var password = document.forms["loginForm"]["password"].value;
+                if (username == "") {
+                    alert("Username cannot be empty!"); 
+                    return false;
+                }
+                else if (password == ""){
+                    alert("Password cannot be empty!");
+                    return false;
+                }
+            }
+        </script>
     </body>
 </html>
 <?php
