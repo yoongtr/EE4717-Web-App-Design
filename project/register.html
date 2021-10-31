@@ -33,34 +33,34 @@
             <div>
                 <div class="content">
                     <div class="login-form">
-                        <form action="register.php" method="POST">
+                        <form action="register.php" method="POST" name="registerForm" onsubmit="return formCheck()">
                             <div class="login-form-box">
                                 <div class="login-form-input">
                                     <label for="firstName">First Name:</label>
-                                    <input type="text" id="firstName" name="firstName" required>
+                                    <input type="text" id="firstName" name="firstName">
                                 </div>
                                 <div class="login-form-input">
                                     <label for="lastName">Last Name:</label>
-                                    <input type="text" id="lastName" name="lastName" required>
+                                    <input type="text" id="lastName" name="lastName">
                                 </div>
                                 <div class="login-form-input">
                                     <label for="username">Username:</label>
-                                    <input type="text" id="username" name="username" required>
+                                    <input type="text" id="username" name="username">
                                 </div>
                                 <div class="login-form-input">
                                   <label for="Email">Email:</label>
-                                  <input type="email" id="email" name="email" required>
+                                  <input type="email" id="email" name="email">
                                 </div>
                                 <div class="login-form-input">
                                   <label for="Password">Password:</label>
-                                  <input type="password" id="password" name="password" required>
+                                  <input type="password" id="password" name="password">
                                 </div>
                                 <div class="login-form-submit">
                                     <input type="submit" name="submit" id="submit" value="Submit">
                                   </div>  
                               </div>
                         </form>
-                        
+                       
                     </div>
                 </div>
                 
@@ -99,12 +99,41 @@
                         <h3>Stay Connected</h3>
                         <form action="subscribe.php" method="POST">
                             <input type="text" placeholder="Enter your email" name="subEmail" id="subEmail">
-                            <button type="submit" name="submit" id="submit">Submit</button>
+                            <button type="submit">Submit</button>
                         </form>
                     </div>
                 </div>
             </footer>
         </div>
+        <script>
+            function formCheck(){
+                var firstname = document.forms["registerForm"]["firstName"].value;
+                var lastname = document.forms["registerForm"]["lastName"].value;
+                var username = document.forms["registerForm"]["username"].value;
+                var password = document.forms["registerForm"]["password"].value;
+                var email = document.forms["registerForm"]["email"].value;
+                if (firstname == "") {
+                    alert("First Name cannot be empty!"); 
+                    return false;
+                }
+                else if (lastname == ""){
+                    alert("Last Name cannot be empty!");
+                    return false;
+                }
+                else if (username == ""){
+                    alert("Username cannot be empty!");
+                    return false;
+                }
+                else if (email == ""){
+                    alert("Email cannot be empty!");
+                    return false;
+                }
+                else if (password == ""){
+                    alert("Password cannot be empty!");
+                    return false;
+                }
+            }
+        </script>
         <script type="text/javascript" src="validator-main.js"></script>
     </body>
 </html>
