@@ -44,10 +44,13 @@ var lastNameNode = document.getElementById("lastName");
 var emailNode = document.getElementById("email");
 var expNode = document.getElementById("myExp");
 
+var subscriberNode = document.getElementById("subEmail");
+
 
 firstNameNode.addEventListener("change", chkName, false);
 lastNameNode.addEventListener("change", chkName, false);
 emailNode.addEventListener("change", chkEmail, false);
+subscriberNode.addEventListener("change", chkEmail, false);
 
 // expNode.addEventListener("change", chkExp, false);
 
