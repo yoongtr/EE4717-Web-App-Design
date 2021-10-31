@@ -461,9 +461,11 @@ input[type='number']{
 
 .memeology-header{
     text-align: center;
-    height: 300px;
-    background: url('./img/memeologyit.png');
-    background-blend-mode: color-burn;
+    min-height: 300px;
+}
+
+.memeology-header img{
+    width: 80%;
 }
 
 .memeology-header h1{

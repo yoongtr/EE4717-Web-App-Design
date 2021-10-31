@@ -41,7 +41,7 @@ if(!isset($_SESSION["sess_user"])){
                     <div class="memeology-header">
                         <h1>#MemeologyIt</h1>
                         <p>Why be normal when you can be a meme god</p>
-                        <!-- <img src="./img/memeologyit.png"> -->
+                        <img src="./img/memeologyit.png">
                     </div>
                     <div class="memeology-form">
                         <form action="memeology-submit.php" method="POST">
