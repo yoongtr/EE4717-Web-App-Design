@@ -4,11 +4,18 @@ if(!isset($_SESSION["sess_user"])){
     header("location:login-main.php");  
 } else{
     include "dbconnect.php";
+    // echo count($_POST);
     if (isset($_GET['productfilter'])) {
         $_SESSION['productfilter'] = $_GET['productfilter'];
         };
     if (!isset($_SESSION['cart_item'])){
         $_SESSION['cart_item'] = array();
+        }; 
+    if (count($_POST)!=0) {
+        // echo var_dump($_POST);
+        foreach($_POST as $k => $v) {
+            $_SESSION["cart_item"][$k]["Quantity"] = $v;
+        };
         };
     if(isset($_GET["action"])) {
         switch($_GET["action"]) {
@@ -93,15 +100,17 @@ if(!isset($_SESSION["sess_user"])){
                         }
                         else {
                         ?>
+                        <form action="" method="post">
                         <table class="product-table">
                             <thead>
                                 <tr>
                                     <th>Image</th>
                                     <th>Item</th>
                                     <th>Item Price</th>
-                                    <th>Quantity</th>
+                                    <th>Qty in Stock</th>
+                                    <th>Purchase Qty</th>
                                     <th>Subtotal</th>
-                                    <th>Remove</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -122,10 +131,11 @@ if(!isset($_SESSION["sess_user"])){
                                         $subtotal = $quantity*$row['Price'];
                                         echo "<tr>";
                                         echo "<td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:10vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td>";
-                                        echo "<td>" .$row['ProductName']. "</td>";
+                                        echo "<td><a href='products.php?productfilter=" .$row['ProductSKU']. "'>" .$row['ProductName']. "</a></td>";
                                         echo "<td>$";
                                         echo $row['Price']. "</td>";
-                                        echo "<td>" .$quantity. "</td>";
+                                        echo "<td>" .$row['Quantity']. "</td>";
+                                        echo "<td><input type='number' value=".$quantity." name=" .$row['ProductSKU']. "></td>";
                                         echo "<td>$";
                                         echo number_format($subtotal, 2). "</td>";
                                         echo "<td><a href='" .$_SERVER['PHP_SELF']. '?action=remove&ProductSKU=' .$row['ProductSKU']. "'>Remove</a></td>";
@@ -140,6 +150,7 @@ if(!isset($_SESSION["sess_user"])){
                                     <th align='right'></th><br>
                                     <th align='right'></th><br>
                                     <th align='right'></th><br>
+                                    <th align='right'></th><br>
                                     <th align='right'>Total:</th><br>
                                     <th align='right'>$<?php echo number_format($total, 2) ?></th><br>
                                     <th align='right'></th><br>
@@ -148,6 +159,11 @@ if(!isset($_SESSION["sess_user"])){
                         </table>
                         <div class="mycart-right">
                             <br>
+                            <input type='submit' value='Update'>
+                        </div>
+                        </form>
+                        <div class="mycart-right">
+                            <p>Or </p>
                             <form action="checkout.php" method="post">
                                 <input type="submit" name="checkout" id="checkout" value="Checkout">
                             </form>
