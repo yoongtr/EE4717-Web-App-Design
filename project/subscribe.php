@@ -6,16 +6,33 @@ if (isset($_POST['submit'])) {
 	exit;}
 	}
 $subEmail = $_POST['subEmail'];
-	
-$sql = "INSERT INTO subscribe (subEmail) 
-		VALUES ('$subEmail')";
+$subMessage = '';
 
-$result = $dbcnx->query($sql);
+$query ="SELECT * FROM subscribe WHERE SubEmail='".$subEmail."'";
+$db_result = $dbcnx->query($query);
 
-if (!$result){ 
-	echo "Your query failed.";
+if(!$db_result){
+    echo "Your db query failed!";
 }
 else{
+    while ($row = $db_result->fetch_assoc()){
+        $dbEmail=$row['SubEmail']; 
+    }
+    if($subEmail == $dbEmail)  
+        {  
+        $subMessage = "Thanks <strong>" .$subEmail. "</strong>, but you have already subscribed!";
+        }
+    else{
+        $sql = "INSERT INTO subscribe (subEmail) 
+		VALUES ('$subEmail')";
+        $result = $dbcnx->query($sql);
+        if (!$result){ 
+            echo "Your query failed.";
+        }
+        else{
+            $subMessage = "Congratulations <strong>" .$subEmail. "</strong>! You have now officially subscribed to Memeology!";
+        }
+    }  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,9 +69,9 @@ else{
                 <div class="content">
                 <div class="login-form">
                             <div class="login-form-box">
-                                <p>Congratulations <strong>
-                                <?=$subEmail;?>
-                                </strong>. You have successfully subscribed to Memeology! <br><br>
+                                <p>
+                                <?=$subMessage;?>
+                                <br><br>
                                 <a href="index.php">Head back Home</a></strong></p>
                                 <p>New User?<br><a href="register.html">Register if you don't have an account</a></p>
                             </div>
@@ -92,13 +109,6 @@ else{
                         <p><a href="index.php">Instagram</a></p>
                         <p><a href="index.php">Twitter</a></p>
                     </div>
-                    <!-- <div class="column-5">
-                        <h3>Stay Connected</h3>
-                        <form>
-                            <input type="text" placeholder="Enter your email" name="email">
-                            <button type="submit">Submit</button>
-                        </form>
-                    </div> -->
                 </div>
             </footer>
         </div>
