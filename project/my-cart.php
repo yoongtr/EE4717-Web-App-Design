@@ -140,7 +140,7 @@ if(!isset($_SESSION["sess_user"])){
                                         echo number_format($subtotal, 2). "</td>";
                                         echo "<td><a href='" .$_SERVER['PHP_SELF']. '?action=remove&ProductSKU=' .$row['ProductSKU']. "'>Remove</a></td>";
                                         echo "</tr>";
-                                        $total = $total + $row['Price'];
+                                        $total = $total + $subtotal;
                                     };
                                 }
                                 ?>
