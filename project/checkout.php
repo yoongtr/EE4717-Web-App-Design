@@ -20,7 +20,7 @@ include "dbconnect.php";
                     <a href="products.php?productfilter=All">Products</a>
                     <a href="memeology-it.php">Submit Your Design!</a>
                     <div class="search-container">
-                        <form method="post" action="searchresults.php">
+                        <form method="post" action="searchresults.php" name="searchForm" onsubmit="return formSearch()">
                           <input type="text" placeholder="Search..." name="SearchBar">
                           <button type="submit"><img src="./img/search_button.png" alt="search button" width="15" height="15"></button>
                         </form>
@@ -135,7 +135,7 @@ include "dbconnect.php";
                     </div>
                     <div class="column-5">
                         <h3>Stay Connected</h3>
-                        <form action="subscribe.php" method="POST">
+                        <form action="subscribe.php" method="POST" name="subForm" onsubmit="return formSubmit()">
                             <input type="text" placeholder="Enter your email" name="subEmail" id="subEmail">
                             <button type="submit" name="submit" id="submit">Submit</button>
                             <script type="text/javascript" src="subscribe.js"></script>
@@ -144,5 +144,21 @@ include "dbconnect.php";
                 </div>
             </footer>
         </div>
+        <script>
+            function formSubmit(){
+                var subEmail = document.forms["subForm"]["subEmail"].value;
+                if (subEmail == "") {
+                    alert("Email cannot be empty!"); 
+                    return false;
+                }
+            }
+            function formSearch(){
+                var search = document.forms["searchForm"]["SearchBar"].value;
+                if (search == "") {
+                    alert("Search cannot be empty!"); 
+                    return false;
+                }
+            }
+        </script>
     </body>
 </html>

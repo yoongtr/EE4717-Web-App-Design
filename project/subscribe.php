@@ -51,7 +51,7 @@ else{
                     <a href="products.php?productfilter=All">Products</a>
                     <a href="memeology-it.php">Submit Your Design!</a>
                     <div class="search-container">
-                        <form method="post" action="searchresults.php">
+                        <form method="post" action="searchresults.php" name="searchForm" onsubmit="return formSearch()">
                             <input type="text" placeholder="Search..." name="SearchBar">
                             <button type="submit"><img src="./img/search_button.png" alt="search button" width="15" height="15"></button>
                         </form>
@@ -112,6 +112,15 @@ else{
                 </div>
             </footer>
         </div>
+        <script>
+            function formSearch(){
+                var search = document.forms["searchForm"]["SearchBar"].value;
+                if (search == "") {
+                    alert("Search cannot be empty!"); 
+                    return false;
+                }
+            }
+        </script>
     </body>
 </html>
 <?php
