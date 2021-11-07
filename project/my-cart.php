@@ -135,7 +135,7 @@ if(!isset($_SESSION["sess_user"])){
                                         echo "<td>$";
                                         echo $row['Price']. "</td>";
                                         echo "<td>" .$row['Quantity']. "</td>";
-                                        echo "<td><input type='number' value=".$quantity." name=" .$row['ProductSKU']. "></td>";
+                                        echo "<td><input type='number' min='1' step='1' value=".$quantity." name=" .$row['ProductSKU']. "></td>";
                                         echo "<td>$";
                                         echo number_format($subtotal, 2). "</td>";
                                         echo "<td><a href='" .$_SERVER['PHP_SELF']. '?action=remove&ProductSKU=' .$row['ProductSKU']. "'>Remove</a></td>";

@@ -161,13 +161,13 @@ if(!isset($_SESSION["sess_user"])){
                 var itemSelec = document.querySelector('select[id="myItem"]');
                 itemSelec = itemSelec.value;
                 if (itemSelec == "T-Shirt"){
-                    pricing = "15.00";
+                    pricing = "14.99";
                 }
                 else if(itemSelec == "Mug"){
-                    pricing = "5.00";
+                    pricing = "4.99";
                 }
                 else if(itemSelec == "Mousepad"){
-                    pricing = "10.00";
+                    pricing = "9.99";
                 }              
                 document.getElementById("itemPrice").innerHTML = "$ " + pricing;
                 total = parseFloat(pricing) + parseFloat(colouring);
@@ -178,13 +178,13 @@ if(!isset($_SESSION["sess_user"])){
                 var colourSelec = document.querySelector('select[id="myColour"]');
                 colourSelec = colourSelec.value;
                 if (colourSelec == "Red" ){
-                    colouring = "2.50";
+                    colouring = "2.49";
                 }
                 else if(colourSelec == "Green"){
-                    colouring = "3.00";
+                    colouring = "2.99";
                 }
                 else if(colourSelec == "Blue"){
-                    colouring = "3.50";
+                    colouring = "3.49";
                 }
                 document.getElementById("colourChoice").innerHTML = "$ " + colouring;
                 total = parseFloat(colouring) + parseFloat(pricing) ;
