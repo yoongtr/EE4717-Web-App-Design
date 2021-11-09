@@ -4,7 +4,6 @@ if(!isset($_SESSION["sess_user"])){
     header("location:login-main.php");  
 } else{
     include "dbconnect.php";
-    // echo count($_POST);
     if (isset($_GET['productfilter'])) {
         $_SESSION['productfilter'] = $_GET['productfilter'];
         };
@@ -12,7 +11,6 @@ if(!isset($_SESSION["sess_user"])){
         $_SESSION['cart_item'] = array();
         }; 
     if (count($_POST)!=0) {
-        // echo var_dump($_POST);
         foreach($_POST as $k => $v) {
             $_SESSION["cart_item"][$k]["Quantity"] = $v;
         };

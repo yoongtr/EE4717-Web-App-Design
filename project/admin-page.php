@@ -14,7 +14,6 @@ if(!isset($_SESSION["sess_user"])){
         $row_user = $result_user->fetch_assoc();
 ?>
 <!DOCTYPE html>
-<!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
 <html lang="en">
     <head>
         <title>Memeology It | Memeology</title>
@@ -78,7 +77,7 @@ if(!isset($_SESSION["sess_user"])){
                         <form method="post" action="admin-page-result.php?adminSKU=<?php echo $row['ProductSKU'];?>">
                                 <?php echo "<tr><td>" . $row['ProductName'] . "</td><td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:15vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['Quantity'] . "</td><td><input type='number' min='1' name='adminQty' value='1' size='2' /><input type='submit' value='Update'/></td></tr>";?>
                         </form>
-                        <?php while($row = $result->fetch_assoc()){   //Creates a loop to loop through results?>
+                        <?php while($row = $result->fetch_assoc()){?>
                             <form method="post" action="admin-page-result.php?adminSKU=<?php echo $row['ProductSKU'];?>">
                             <?php echo "<tr><td>" . $row['ProductName'] . "</td><td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:15vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['Quantity'] . "</td><td><input type='number' min='1' name='adminQty' value='1' size='2' /><input type='submit' value='Update'/></td></tr>";?>
                             </form>
@@ -88,8 +87,7 @@ if(!isset($_SESSION["sess_user"])){
                         }; 
                     };
                     ?>
-                </div>
-                
+                </div> 
             </div>
             <footer>
                 <hr>

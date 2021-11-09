@@ -51,7 +51,6 @@ if(isset($_GET["action"])) {
 }
 ?>
 <!DOCTYPE html>
-<!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
 <html lang="en">
     <head>
         <title>Products | Memeology</title>
@@ -81,8 +80,6 @@ if(isset($_GET["action"])) {
             </header>
 
             <div>
-                <!-- <p><?php var_dump($_SESSION); ?></p> -->
-                <!-- <p><?php echo $_SESSION['productfilter']=='Sale'; ?></p> -->
                 <div class="product-leftcol">
                     <div class="product-filternav">
                     <h4>Filter Product By</h4>
@@ -148,13 +145,11 @@ if(isset($_GET["action"])) {
                             };
 
                             $result = $dbcnx->query($sql);
-                            // echo $result;
                             if (!$result){
                                 echo "<h2>Unable to find product(s).</h2>";
                             }
                             else{
                                 $row = $result->fetch_assoc();
-                            // };
                         ?>
                         <h2>Showing result(s) for
                         <?php
@@ -206,7 +201,7 @@ if(isset($_GET["action"])) {
                             <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>?action=add&ProductSKU=<?php echo $row["ProductSKU"]; ?>">
                                 <?php echo "<tr><td>" . $row['ProductName'] . "</td><td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:15vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['Quantity'] . "</td><td><input type='number' min='1' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/></td></tr>";?>
                             </form>
-                                <?php while($row = $result->fetch_assoc()){   //Creates a loop to loop through results?>
+                                <?php while($row = $result->fetch_assoc()){?>
                                 <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>?action=add&ProductSKU=<?php echo $row["ProductSKU"]; ?>">
                                 <?php echo "<tr><td>" . $row['ProductName'] . "</td><td>" . '<img src="data:image/jpeg;base64,'.base64_encode($row['ProductImage']).'" style="width:15vw; height: 200px; object-fit: cover; max-width: 100%;"/>' . "</td><td>" . $row['ProductDescription'] . "</td><td>" . $row['Price'] . "</td><td>" . $row['Quantity'] . "</td><td><input type='number' min='1' name='Quantity' value='1' size='2' /><input type='submit' value='Add to Cart'/></td></tr>";?>
                                 </form>

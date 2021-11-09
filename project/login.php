@@ -1,4 +1,4 @@
-<?php // register.php
+<?php
 include "dbconnect.php";
 if (isset($_POST['login'])) {
 	if (empty($_POST['username']) || empty ($_POST['password'])) {
@@ -7,13 +7,9 @@ if (isset($_POST['login'])) {
 	}   
 $username = $_POST['username'];
 $password = $_POST['password'];
-
 $password = md5($password);
-
 $query ="SELECT * FROM users WHERE Username='".$username."' AND UserPassword='".$password."'";
-
 $result = $dbcnx->query($query);
-
 if ($result!=0){
     while ($row = $result->fetch_assoc()){
         $dbusername=$row['Username'];  
@@ -25,8 +21,6 @@ if ($result!=0){
         session_start();  
         $_SESSION['sess_user']=$username;
         $_SESSION['sess_user_id']=$dbuserID;
-    
-        /* Redirect browser */  
         header("Location: my-account.php");  
         }
     else{

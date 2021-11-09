@@ -62,8 +62,7 @@ else{
                     </div>
                 </nav>
             </header>
-            <div>
-                
+            <div>   
             </div>
             <div>
                 <div class="content">
@@ -76,8 +75,7 @@ else{
                                 <p>New User?<br><a href="register.html">Register if you don't have an account</a></p>
                             </div>
                     </div>
-                </div>
-                
+                </div> 
             </div>
             <footer>
                 <hr>

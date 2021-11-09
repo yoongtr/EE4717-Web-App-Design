@@ -4,11 +4,8 @@ if (isset($_GET['adminSKU'])) {
     $_SESSION['adminSKU'] = $_GET['adminSKU'];
     };
 include "dbconnect.php";
-// echo var_dump($_SESSION);
-// echo var_dump($_POST);
 ?>
 <!DOCTYPE html>
-<!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
 <html lang="en">
     <head>
         <title>Memeology It | Memeology</title>
@@ -61,8 +58,7 @@ include "dbconnect.php";
                     </p>
                     <?php }; ?>
                     <p><a href="admin-page.php">Back to Admin Page</a></p>
-                </div>
-                
+                </div>    
             </div>
             <footer>
                 <hr>

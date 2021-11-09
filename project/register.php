@@ -10,14 +10,10 @@ $lastName = $_POST['lastName'];
 $email = $_POST['email'];    
 $username = $_POST['username'];
 $password = $_POST['password'];
-
 $password = md5($password);
-	
 $sql = "INSERT INTO users (FirstName, LastName, Username, Email, UserPassword, isAdmin) 
 		VALUES ('$firstName','$lastName','$username','$email','$password', FALSE)";
-
 $result = $dbcnx->query($sql);
-
 if (!$result) 
 	echo "Your query failed.";
 else
@@ -28,6 +24,5 @@ else
 	$user_result = $dbcnx->query($user_query);
 	$row_user = $user_result->fetch_assoc();
 	$_SESSION['sess_user_id']=$row_user['UserID'];
-	header("location:index.php");  
-	
+	header("location:index.php");
 ?>

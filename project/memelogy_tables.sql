@@ -1,7 +1,5 @@
 USE f32ee;
 
--- Tested adding these tables to mySQL, they work weeee
-
 CREATE TABLE users (
     UserID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     FirstName CHAR(40),

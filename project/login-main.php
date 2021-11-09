@@ -5,7 +5,6 @@ if(isset($_SESSION["sess_user"])){
 } else{
 ?>
 <!DOCTYPE html>
-<!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
 <html lang="en">
     <head>
         <title>Login | Memeology</title>

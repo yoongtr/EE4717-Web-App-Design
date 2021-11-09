@@ -12,11 +12,8 @@ $myMeme = $_POST['myMeme'];
 $myAddress = $_POST['myAddress'];
 $myComments = $_POST['myComments'];
 $username = $_SESSION['sess_user'];
-
-// echo $username;
 $query1 = "SELECT UserID FROM users WHERE Username = '$username'";
 $result1 = $dbcnx->query($query1);
-
 if (!$result1){
     echo "query_failed";
 }
@@ -33,7 +30,6 @@ else{
     else{
 ?>
 <!DOCTYPE html>
-<!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
 <html lang="en">
     <head>
         <title>Successful Application | Memeology</title>
@@ -78,14 +74,12 @@ else{
                                 $headers = 'From: f32ee@localhost' . "\r\n" .
                                     'Reply-To: f32ee@localhost' . "\r\n" .
                                     'X-Mailer: PHP/' . phpversion();
-
                                 mail($to, $subject, $message, $headers,'-ff32ee@localhost');
                                 echo ("Mail sent to : ".$to);
                                 ?>
                             </div>
                     </div>
-                </div>
-                
+                </div>      
             </div>
             <footer>
                 <hr>

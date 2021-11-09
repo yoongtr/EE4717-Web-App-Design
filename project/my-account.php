@@ -3,7 +3,6 @@ session_start();
 if(!isset($_SESSION["sess_user"])){  
     header("location:login-main.php");  
 } else{
-    // echo var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">

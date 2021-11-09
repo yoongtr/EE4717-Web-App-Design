@@ -5,7 +5,6 @@ if(!isset($_SESSION["sess_user"])){
 } else{
 ?>
 <!DOCTYPE html>
-<!-- Changed relevant links to my-cart.html and join-us.html and login.html-->
 <html lang="en">
     <head>
         <title>Memeology It | Memeology</title>
@@ -34,7 +33,6 @@ if(!isset($_SESSION["sess_user"])){
                 </nav>
             </header>
             <div>
-                
             </div>
             <div>
                 <div class="content">
@@ -87,8 +85,7 @@ if(!isset($_SESSION["sess_user"])){
                              </div>
                         </form>
                     </div>
-                </div>
-                
+                </div> 
             </div>
             <footer>
                 <hr>

@@ -49,7 +49,6 @@ if(isset($_GET["action"])) {
     header('location: ' . $_SERVER['PHP_SELF']. '?' . SID);
     exit();
 }
-// echo var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,27 +82,20 @@ if(isset($_GET["action"])) {
             <div>
                 <div class="content">
                     <div>
-                        <!-- Slideshow container -->
                         <div class="slideshow-container">
-                            <!-- Full-width images with number and caption text -->
                             <div class="mySlides">
                                 <a href="products.php?productfilter=005_PepeShirt_S"><img src="./img/slideshow-1.png" style="width:100%"></a>
                             </div>
-                        
                             <div class="mySlides">
                                 <a href="products.php?productfilter=012_DuckShirt"><img src="./img/slideshow-2.png" style="width:100%"></a>
                             </div>
-                        
                             <div class="mySlides">
                                 <a href="products.php?productfilter=002_YesPlsMug"><img src="./img/slideshow-3.png" style="width:100%"></a>
                             </div>
-                        
-                            <!-- Next and previous buttons -->
                             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                             <a class="next" onclick="plusSlides(1)">&#10095;</a>
                         </div>
                         <br>
-                        <!-- The dots/circles -->
                         <div style="text-align:center">
                             <span class="dot" onclick="currentSlide(1)"></span>
                             <span class="dot" onclick="currentSlide(2)"></span>
@@ -145,7 +137,6 @@ if(isset($_GET["action"])) {
                                     FROM products
                                     WHERE ProductSKU = '001_Fan' ";
                                     $result0 = $dbcnx->query($sql0);
-                                    // echo $result;
                                     if (!$result0){
                                         echo "query_failed";
                                     }
@@ -161,7 +152,6 @@ if(isset($_GET["action"])) {
                                     FROM products
                                     WHERE ProductSKU = '005_PepeShirt_S' ";
                                     $result1 = $dbcnx->query($sql1);
-                                    // echo $result;
                                     if (!$result1){
                                         echo "query_failed";
                                     }
@@ -177,7 +167,6 @@ if(isset($_GET["action"])) {
                                     FROM products
                                     WHERE ProductSKU = '009_WomenCat' ";
                                     $result2 = $dbcnx->query($sql2);
-                                    // echo $result;
                                     if (!$result2){
                                         echo "query_failed";
                                     }
@@ -193,7 +182,6 @@ if(isset($_GET["action"])) {
                                     FROM products
                                     WHERE ProductSKU = '006_FineMug' ";
                                     $result3 = $dbcnx->query($sql3);
-                                    // echo $result;
                                     if (!$result3){
                                         echo "query_failed";
                                     }
@@ -304,8 +292,7 @@ if(isset($_GET["action"])) {
                                             echo $row3['Price'];
                                             ?>
                                         </p>
-                                        <p>
-                                            
+                                        <p> 
                                         </p>
                                     </td>
                                 </tr>
