@@ -7,4 +7,4 @@
 * Case Study 3 & 4: inside `/exercises`
 
 ## Projects
-* You can start writing HTML/CSS/JS/PHP files inside the `project` folder for our project. But just lemme create one page for CSS styling format first.
+* All project files are inside `project` folder
